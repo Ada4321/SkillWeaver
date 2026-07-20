@@ -2,6 +2,22 @@
 
 MCTS-driven skill search + VLA data collection in IsaacLab.
 
+## 1. Installation
+
+(1) Clone a stable release of IsaacLab, using
+
+   ```bash
+   git clone https://github.com/isaac-sim/IsaacLab.git -b v2.3.1
+   ```
+
+(2) Then follow the official [installation guide](https://isaac-sim.github.io/IsaacLab/main/source/setup/installation/index.html) to install IsaacSim and IsaacLab. IsaacSim installed from either pip or pre-built binary is OK. After this step, you should have a conda environment with IsaacLab and other dependencies (e.g. Pytorch) installed.
+
+(3) Install other dependencies:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
 ## 1. Data bundle
 
 The scripts under `scripts/` need scenes, assets, and RL checkpoints that live
