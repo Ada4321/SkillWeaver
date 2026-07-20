@@ -16,8 +16,8 @@ defaults:
   - _self_
 
 init_arm_pos_files:
-  - "/home/hez2/code/Grounded_MCTS_IsaacLab/data/init_arm_qpos_cano_aug.npz"
-  - "/home/hez2/code/Grounded_MCTS_IsaacLab/data/init_arm_qpos_cano_all_init.npz"
+  - "data/init_arm_qpos_cano_aug.npz"
+  - "data/init_arm_qpos_cano_all_init.npz"
 
 # --- Head (front) camera = fixed LIBERO agentview ---
 front_camera_aug_center: [0.470, 0.0, 0.05]    # look-at xy (z comes from lookat_z; center[2] is ignored by the sampler)

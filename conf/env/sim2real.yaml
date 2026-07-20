@@ -20,8 +20,8 @@ defaults:
   - _self_
 
 init_arm_pos_files:
-  - /home/hez2/code/Grounded_MCTS_IsaacLab/data/init_arm_qpos_real_near.npz
-  - /home/hez2/code/Grounded_MCTS_IsaacLab/data/init_arm_qpos_real_near_1.npz
+  - data/init_arm_qpos_real_near.npz
+  - data/init_arm_qpos_real_near_1.npz
 
 # Table z: target top-surface z ~= [-0.05, +0.05] across the real_world 25-table
 # pool. Sampler interprets table_z_range as table CENTER z, so we shift the
@@ -58,7 +58,7 @@ robot:
   spawn:
     # Base USD (no libero MDL material overlay) — same baked wrist geometry,
     # default URDF-imported visuals (no _xml_overlay.usda).
-    usd_path: /home/hez2/code/Grounded_MCTS_IsaacLab/assets/franka_gripper/usd/franka_gripper_libero_visual_wrist_palmback_5cm_tilt15.usd
+    usd_path: assets/franka_gripper/usd/franka_gripper_libero_visual_wrist_palmback_5cm_tilt15.usd
 
 # Wrist mount: pin to the ablate_neg6p5cm_p8 canonical (extra
 # (0.015 m back, 8° pitch) on top of the URDF -5cm/15° baseline

@@ -46,8 +46,8 @@ isaaclab:
   place_offset_gripper_orientation: 0.0
   place_offset_nonvertical: 0.01
   approach_vertical_angle_deg: 20.0
-  container_list: /home/hez2/code/Grounded_MCTS_IsaacLab/data/assets_for_agent/container.txt
-  elongated_list: /home/hez2/code/Grounded_MCTS_IsaacLab/data/assets_for_agent/elongated.txt
+  container_list: data/assets_for_agent/container.txt
+  elongated_list: data/assets_for_agent/elongated.txt
   container_upright_cos_threshold: 0.866
   place_noise_std_xyz:
     - 0.0

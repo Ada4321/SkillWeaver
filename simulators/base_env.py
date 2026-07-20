@@ -152,9 +152,20 @@ class BaseEnv(DirectRLEnv):
             self.world_size = 1
             self.rank = 0
 
+        from simulators.base_env_cfg import LEGACY_SCENE_ASSET_ROOT, SKILLWEAVER_DATA_ROOT
+
+        self._scene_asset_root_path = str(getattr(
+            cfg, "scene_asset_root_path", os.path.join(SKILLWEAVER_DATA_ROOT, "sim_scene_gen")))
+
         with open(scene_desc_file, 'r') as f:
-            self.scene_desc = json.load(f)
-        self._scene_asset_root_path = str(getattr(cfg, "scene_asset_root_path", "/data/group_data/katefgroup-ssd/sim_scene_gen"))
+            raw_scene_desc = f.read()
+        # Scene JSONs embed absolute paths authored under LEGACY_SCENE_ASSET_ROOT
+        # (pose_path / tasks / layouts / table_z / cam_poses). Rewrite that prefix onto
+        # the configured root so a downloaded bundle resolves regardless of where it lives.
+        if self._scene_asset_root_path != LEGACY_SCENE_ASSET_ROOT:
+            raw_scene_desc = raw_scene_desc.replace(
+                LEGACY_SCENE_ASSET_ROOT, self._scene_asset_root_path)
+        self.scene_desc = json.loads(raw_scene_desc)
 
         table_desc = self.scene_desc.get("table")
         self._scene_has_table_desc = isinstance(table_desc, dict)

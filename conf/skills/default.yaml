@@ -79,14 +79,14 @@ rl:
   pick_convex_ckpt: null
   pick_convex_lying_ckpt: null
   pick_handle_ckpt: null
-  upright_list: /home/hez2/code/Grounded_MCTS_IsaacLab/data/assets_for_agent/pick_upright.txt
-  convex_list: /home/hez2/code/Grounded_MCTS_IsaacLab/data/assets_for_agent/pick_convex.txt
-  handle_list: /home/hez2/code/Grounded_MCTS_IsaacLab/data/assets_for_agent/pick_handle.txt
+  upright_list: data/assets_for_agent/pick_upright.txt
+  convex_list: data/assets_for_agent/pick_convex.txt
+  handle_list: data/assets_for_agent/pick_handle.txt
   handle_pcd_agents: [pick_handle]
   place_align_cup_bottom: false
   place_ckpt: null
   place_upright_ckpt: null
-  place_upright_list: /home/hez2/code/Grounded_MCTS_IsaacLab/data/assets_for_agent/place_upright.txt
+  place_upright_list: data/assets_for_agent/place_upright.txt
   place_upright_tgt_cos_threshold: 0.866
   place_upright_gripper_cos_threshold: 0.707
   pose_ckpt: null

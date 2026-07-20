@@ -1,0 +1,87 @@
+{
+  "place beside target": {
+    "value": "Put A to a curtain side of B means to put A onto the vacant spot on the supporting surface BESIDE B, NOT on B. Also, you should make sure the axis-aligned bounding boxes of A and B have a gap of 2-5 cm between them along the axis of interest. You should determine the axis of interest and definition of left, right, front, back, etc. based on the task instruction and coordinate system information.",
+    "tags": [
+      "actor_phase_2",
+      "judge"
+    ]
+  },
+  "place into thin container": {
+    "value": "When placing A into a thin container B (cup, mug, vase, glass, bottle, jar, etc.), the actor MUST first do an orientation adjustment to make A upright with its long axis aligned to B's vertical/height axis, BEFORE the place action. The judge MUST verify both: (1) A is UPRIGHT with its long axis aligned to B's vertical axis, and (2) A is actually inserted into B's cavity. Only when both hold is it success — propped/balanced on the rim does not count. Drop A directly into B in case the gripper could not fit into B's opening.",
+    "tags": [
+      "actor_phase_1",
+      "actor_phase_2",
+      "judge"
+    ]
+  },
+  "straighten up objects": {
+    "value": "When straightening up an object, you should align the upright axis of the object with the world's vertical axis, and make sure the object is placed back to its original position on the supporting surface.",
+    "tags": [
+      "actor_phase_1",
+      "actor_phase_2",
+      "judge"
+    ]
+  },
+  "place into lying container": {
+    "value": "If the destination container B is lying on its side or otherwise not upright (its opening does not face up in the world frame), the actor MUST FIRST schedule a subgoal to straighten B upright (opening facing up) BEFORE picking A and placing into B. The judge MUST reject any 'place into B' success while B remains tipped.",
+    "tags": [
+      "actor_phase_1",
+      "actor_phase_2",
+      "judge"
+    ]
+  },
+  "pour from container into container": {
+    "value": "When pouring from source container A into target container B, the SINGLE move_without_place step the actor schedules MUST already tilt A so its spout/opening points DOWNWARD into B's opening. Do NOT split this into 'first move upright above B, then tilt later' — there is no later tilt step in this plan, and leaving A upright or only horizontally aligned in this step will make the pour fail.",
+    "tags": [
+      "actor_phase_1",
+      "actor_phase_2",
+      "judge"
+    ]
+  },
+  "verify drawer is fully closed": {
+    "value": "When the subgoal is to shut a drawer or door, the judge MUST verify the object's final state flag is 'closed'. A state of 'partially open' is a failure, even if the object moved most of the way. The verification criterion MUST be the discrete state flag, not a simple position delta.",
+    "tags": [
+      "judge"
+    ]
+  },
+  "verify stowed height in closable containers": {
+    "value": "When placing an object into a drawer or other container that will be closed, the actor MUST first verify the object's height is less than the container's internal vertical clearance. The judge MUST reject the plan if the object's top z-bound would extend beyond the cabinet's opening for that container.",
+    "tags": [
+      "actor_phase_1",
+      "judge"
+    ]
+  },
+  "lay tall objects down in shallow drawers": {
+    "value": "When placing a tall object like a bottle into a shallow drawer, if its upright height exceeds the available clearance, the actor's grounder MUST orient it to lie on its side. Its long axis MUST be aligned horizontally, and the judge must verify its new vertical dimension (i.e., its diameter) fits.",
+    "tags": [
+      "actor_phase_2",
+      "judge"
+    ]
+  },
+  "place into side-opening container": {
+    "value": "When placing an object into a container with a side opening like a microwave or oven, the actor's planner MUST select a skill that controls the gripper's approach direction from the side. Standard top-down `place` skills are unsuitable and MUST be avoided as they will collide with the container's top.",
+    "tags": [
+      "actor_phase_1"
+    ]
+  },
+  "verify placement inside vs on top": {
+    "value": "When a subgoal is to place an object 'inside' a container, the judge MUST verify full bounding-box containment of the object within the container. An object resting on the container's top surface fails this check and MUST be rejected, as its upper z-bound will exceed the container's.",
+    "tags": [
+      "judge"
+    ]
+  },
+  "target just inside side opening": {
+    "value": "When placing an object into a container with a side opening like a microwave or cabinet, the actor's grounder MUST target a point for the object's center that is just inside the opening. The judge MUST verify the target point is within the container's bounds but close to the plane of the opening, not deep inside where the gripper cannot reach.",
+    "tags": [
+      "actor_phase_2",
+      "judge"
+    ]
+  },
+  "place object fully inside side-opening container": {
+    "value": "When placing an object into a side-opening container like a microwave, the grounder MUST target a point for the object's center deep enough for its entire bounding box to clear the opening. The judge MUST verify the placed object's bounding box is fully contained within the container's interior.",
+    "tags": [
+      "actor_phase_2",
+      "judge"
+    ]
+  }
+}

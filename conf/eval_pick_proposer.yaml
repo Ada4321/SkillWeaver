@@ -13,8 +13,8 @@ run:
   post_lift_hold_steps: 20
   out_dir: /data/group_data/katefgroup/datasets/hez2/ablation/grasp/${now:%Y%m%d_%H%M%S}
   # asset selection is driven by the manifest; run.sh loops target_idx 0..N-1.
-  manifest: /home/hez2/code/Grounded_MCTS_IsaacLab/eval_grasp/asset_manifest.json
-  asset_root: /data/group_data/katefgroup-ssd/sim_scene_gen/assets
+  manifest: eval_grasp/asset_manifest.json
+  asset_root: ${oc.env:SKILLWEAVER_DATA_ROOT}/sim_scene_gen/assets
   target_idx: 0           # which unit in the flattened manifest to run
   cos_upright: 0.9        # |canonical_z . world_z| > this  => upright/standing
   cos_lying: 0.3          # |canonical_z . world_z| < this  => lying

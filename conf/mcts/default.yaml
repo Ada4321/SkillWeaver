@@ -38,7 +38,7 @@ save_tree_observations: true
 save_tree_pcd: true
 tasks:
   task_key: tasks
-  surface_tgt_list: /home/hez2/code/SceneGen_IsaacLab/asset_gen/asset_post_process/surface_list_0305.txt
+  surface_tgt_list: ${oc.env:SKILLWEAVER_DATA_ROOT}/misc/surface_list_0305.txt
   force_upright: false
   upright_random_prob: 0.5
   layout_ids: null

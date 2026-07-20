@@ -5,9 +5,9 @@ use_memory: false
 #   both    - union of the two (retrieval-layer relevance decides per phase)
 memory_source: general
 memory_paths:
-  - /home/hez2/code/Grounded_MCTS_IsaacLab/data/memory/memory_human.json
+  - data/memory/memory_human.json
 task_memory_paths:
-  - /home/hez2/code/Grounded_MCTS_IsaacLab/data/memory/memory_task_strategies.json
+  - data/memory/memory_task_strategies.json
 default_key: null
 max_output_tokens: 4096
 top_k: 2

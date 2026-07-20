@@ -19,7 +19,9 @@ export GEMINI_API_KEY="your_gemini_api_key"
 
 USER=hez2
 
-cd /home/${USER}/code/Grounded_MCTS_IsaacLab
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+cd "${REPO_ROOT}"
+: "${SKILLWEAVER_DATA_ROOT:?set SKILLWEAVER_DATA_ROOT to the extracted SkillWeaver data bundle root (see README)}"
 source ~/miniconda3/etc/profile.d/conda.sh
 
 export NCCL_ASYNC_ERROR_HANDLING=1
@@ -72,7 +74,7 @@ IGNORE_COLLISION="[]"
 # WidowX has a SINGLE general pick policy (IsaacLabEnvs WidowX-Pick-v0); the
 # skills=simpler_widowx preset empties the upright/convex/handle dispatch lists
 # so every pick routes to this ckpt with the full object point cloud.
-PICK_CKPT="${PICK_CKPT:-/home/suli/last_gripper_ep_9800_rew_2142.01.pth}"
+PICK_CKPT="${PICK_CKPT:-${SKILLWEAVER_DATA_ROOT}/ckpts/widowx_pick.pth}"
 if [[ ! -f "${PICK_CKPT}" ]]; then
   echo "Missing WidowX pick ckpt: ${PICK_CKPT}" >&2
   exit 1
@@ -81,7 +83,7 @@ fi
 # =========================
 # Batch scene selection
 # =========================
-SCENE_ROOT="${SCENE_ROOT:-/data/group_data/katefgroup-ssd/sim_scene_gen/scenes/simpler/${TASK_NAME}}"
+SCENE_ROOT="${SCENE_ROOT:-${SKILLWEAVER_DATA_ROOT}/sim_scene_gen/scenes/simpler/${TASK_NAME}}"
 # Supported formats: "1", "1,3,7", "10-15", "1,3,10-12"
 SCENE_IDS="${SCENE_IDS:-1}"
 
@@ -157,7 +159,7 @@ printf '  - %s\n' "${SCENE_FILES[@]}"
 # =========================
 # simpler VLM-planning settings
 # =========================
-SAVE_ROOT="${SAVE_ROOT:-/data/group_data/katefgroup/datasets/vla_data_sim/simpler/${TASK_NAME}_vlm}"
+SAVE_ROOT="${SAVE_ROOT:-output/simpler/${TASK_NAME}_vlm}"
 VIEW_NAMES="['front']"
 ACTOR_MODEL="gemini-2.5-pro"
 

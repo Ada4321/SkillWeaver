@@ -77,7 +77,7 @@ robot_init_qpos_preset: widowx_sink
 # banks, which would fail the arm_dof shape check). Sampled around the
 # SimplerEnv sink pose by SceneGen robot_augmentation/sample_widowx.sh.
 init_arm_pos_files:
-  - "/home/hez2/code/Grounded_MCTS_IsaacLab/data/init_arm_qpos_widowx_sink.npz"
+  - "data/init_arm_qpos_widowx_sink.npz"
 
 # WidowX (bridge) has no wrist camera; the wx250s USD has no wrist_camera_link
 # to anchor one, so the wrist TiledCamera must not be spawned.

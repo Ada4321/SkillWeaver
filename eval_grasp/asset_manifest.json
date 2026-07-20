@@ -1,0 +1,231 @@
+{
+  "round": {
+    "pose_init": "settled",
+    "categories": {
+      "Bathroom_Counter/apothecary_jar": [
+        "asset_0041",
+        "asset_0042",
+        "asset_0043",
+        "asset_0044",
+        "asset_0045",
+        "asset_0046",
+        "asset_0047",
+        "asset_0048",
+        "asset_0049",
+        "asset_0050"
+      ],
+      "Bathroom_Counter/moisturizer_jar": [
+        "asset_0091",
+        "asset_0092",
+        "asset_0093",
+        "asset_0094",
+        "asset_0095",
+        "asset_0096",
+        "asset_0097",
+        "asset_0098",
+        "asset_0099",
+        "asset_0100"
+      ],
+      "Bathroom_Counter/pill_bottle": [
+        "asset_0091",
+        "asset_0092",
+        "asset_0093",
+        "asset_0094",
+        "asset_0095",
+        "asset_0096",
+        "asset_0097",
+        "asset_0098",
+        "asset_0099",
+        "asset_0100"
+      ],
+      "Bathroom_Counter/storage_canister": [
+        "asset_0040",
+        "asset_0041",
+        "asset_0042",
+        "asset_0043",
+        "asset_0044",
+        "asset_0046",
+        "asset_0047",
+        "asset_0048",
+        "asset_0049",
+        "asset_0050"
+      ]
+    }
+  },
+  "flat": {
+    "pose_init": "settled",
+    "categories": {
+      "libero/butter_box": [
+        "asset_0160",
+        "asset_0161",
+        "asset_0162",
+        "asset_0163",
+        "asset_0164",
+        "asset_0165",
+        "asset_0166",
+        "asset_0167",
+        "asset_0168",
+        "asset_0169"
+      ],
+      "libero/cream_cheese_box": [
+        "asset_0160",
+        "asset_0161",
+        "asset_0162",
+        "asset_0163",
+        "asset_0164",
+        "asset_0165",
+        "asset_0166",
+        "asset_0167",
+        "asset_0168",
+        "asset_0169"
+      ],
+      "libero/chocolate_pudding_box": [
+        "asset_0160",
+        "asset_0161",
+        "asset_0162",
+        "asset_0163",
+        "asset_0164",
+        "asset_0165",
+        "asset_0166",
+        "asset_0167",
+        "asset_0168",
+        "asset_0169"
+      ],
+      "libero/cookie_box": [
+        "asset_0041",
+        "asset_0042",
+        "asset_0043",
+        "asset_0044",
+        "asset_0045",
+        "asset_0046",
+        "asset_0047",
+        "asset_0048",
+        "asset_0049",
+        "asset_0050"
+      ],
+      "Kitchen_Table/tea_box": [
+        "asset_0040",
+        "asset_0042",
+        "asset_0043",
+        "asset_0044",
+        "asset_0045",
+        "asset_0046",
+        "asset_0047",
+        "asset_0048",
+        "asset_0049",
+        "asset_0050"
+      ]
+    }
+  },
+  "elongated_upright": {
+    "pose_init": "upright",
+    "categories": {
+      "Bathroom_Counter/shampoo_bottle": [
+        "asset_0091",
+        "asset_0092",
+        "asset_0093",
+        "asset_0094",
+        "asset_0095",
+        "asset_0096",
+        "asset_0097",
+        "asset_0098",
+        "asset_0099",
+        "asset_0100"
+      ],
+      "Bathroom_Counter/conditioner_bottle": [
+        "asset_0091",
+        "asset_0092",
+        "asset_0093",
+        "asset_0094",
+        "asset_0095",
+        "asset_0096",
+        "asset_0097",
+        "asset_0098",
+        "asset_0099",
+        "asset_0100"
+      ],
+      "Bathroom_Counter/lotion_bottle": [
+        "asset_0091",
+        "asset_0092",
+        "asset_0093",
+        "asset_0094",
+        "asset_0095",
+        "asset_0096",
+        "asset_0097",
+        "asset_0098",
+        "asset_0099",
+        "asset_0100"
+      ],
+      "Bathroom_Counter/cologne_bottle": [
+        "asset_0091",
+        "asset_0092",
+        "asset_0093",
+        "asset_0094",
+        "asset_0095",
+        "asset_0096",
+        "asset_0097",
+        "asset_0098",
+        "asset_0099",
+        "asset_0100"
+      ],
+      "Bathroom_Counter/perfume_bottle": [
+        "asset_0091",
+        "asset_0092",
+        "asset_0093",
+        "asset_0094",
+        "asset_0095",
+        "asset_0096",
+        "asset_0097",
+        "asset_0098",
+        "asset_0099",
+        "asset_0100"
+      ]
+    }
+  },
+  "concave": {
+    "pose_init": "standing",
+    "categories": {
+      "real_world/cup": [
+        "asset_0011",
+        "asset_0012",
+        "asset_0013",
+        "asset_0014",
+        "asset_0015",
+        "asset_0016",
+        "asset_0017",
+        "asset_0018",
+        "asset_0019",
+        "asset_0020"
+      ],
+      "real_world/green_bowl": [
+        "asset_0011",
+        "asset_0012",
+        "asset_0013",
+        "asset_0014",
+        "asset_0015",
+        "asset_0016",
+        "asset_0017",
+        "asset_0018",
+        "asset_0019",
+        "asset_0020"
+      ]
+    }
+  },
+  "concave_lying": {
+    "pose_init": "lying",
+    "categories": {
+      "real_world/cup": [
+        "asset_0011",
+        "asset_0012",
+        "asset_0013",
+        "asset_0014",
+        "asset_0015",
+        "asset_0016",
+        "asset_0017",
+        "asset_0018",
+        "asset_0019",
+        "asset_0020"
+      ]
+    }
+  }
+}

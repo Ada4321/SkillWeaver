@@ -15,7 +15,7 @@ isaaclab:
   robot_name: widowx
   # rl_games network cfg the RL-policy player is built from -- must match the
   # WidowX training run (WidowX-Pick-v0), not the Franka agent cfg.
-  agent_cfg_file: /home/hez2/code/IsaacLabEnvs/isaaclabenvs/tasks/widowx/agents/rl_games_ppo_cfg.yaml
+  agent_cfg_file: ${oc.env:SKILLWEAVER_DATA_ROOT}/misc/widowx_rl_games_ppo_cfg.yaml
   data_collect_w: 640        # 4:3, same aspect as the 640x480 camera render
   data_collect_h: 480
   camera_names:              # front only: bridge has no wrist camera, top unused

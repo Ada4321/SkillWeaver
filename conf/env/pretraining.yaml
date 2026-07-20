@@ -44,7 +44,7 @@ robot:
   spawn:
     # Base USD (no libero MDL material overlay) — same baked wrist geometry,
     # default URDF-imported visuals (no _xml_overlay.usda).
-    usd_path: /home/hez2/code/Grounded_MCTS_IsaacLab/assets/franka_gripper/usd/franka_gripper_libero_visual_wrist_palmback_5cm_tilt15.usd
+    usd_path: assets/franka_gripper/usd/franka_gripper_libero_visual_wrist_palmback_5cm_tilt15.usd
 
 # Wrist mount DR. Picks one of the 6 visually-verified combos in
 # wrist_camera_aug_combos (BaseEnvCfg default) uniformly ONCE per env

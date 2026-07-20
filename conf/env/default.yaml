@@ -6,10 +6,10 @@ decimation: null  # null = use BaseEnvCfg default (25); set e.g. env.decimation=
 # CLI: env.release_teleop_joint_state=true
 release_teleop_joint_state: false
 init_arm_pos_files:
-  - "/home/hez2/code/Grounded_MCTS_IsaacLab/data/init_arm_qpos_cano_aug.npz"
-  - "/home/hez2/code/Grounded_MCTS_IsaacLab/data/init_arm_qpos_cano_all_init.npz"
-  - "/home/hez2/code/Grounded_MCTS_IsaacLab/data/init_arm_qpos_xy0.05.npz"
-  - "/home/hez2/code/Grounded_MCTS_IsaacLab/data/init_arm_qpos_real_near.npz"
+  - "data/init_arm_qpos_cano_aug.npz"
+  - "data/init_arm_qpos_cano_all_init.npz"
+  - "data/init_arm_qpos_xy0.05.npz"
+  - "data/init_arm_qpos_real_near.npz"
 randomize_xy: false
 randomize_xy_range: 0.05
 # When true, objects whose category is listed in env.half_pcd_list swap their
@@ -17,7 +17,7 @@ randomize_xy_range: 0.05
 # (handle half + 12.5% L into the head side). Full pcd remains in
 # object_point_clouds for grasp-judge / 3d range / other uses.
 use_half_pcd: false
-half_pcd_list: /home/hez2/code/Grounded_MCTS_IsaacLab/data/assets_for_agent/half_pcd.txt
+half_pcd_list: data/assets_for_agent/half_pcd.txt
 test_layout_id: []
 split: train
 layout_sample_weights: null   # 4 front->back quartile masses; null = default [4,3,2,1]

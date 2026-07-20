@@ -1,3 +1,4 @@
+import os
 from datetime import datetime
 from pathlib import Path
 
@@ -14,6 +15,12 @@ from isaaclab.utils import configclass
 # Basic paths
 PROJECT_ROOT = Path(__file__).parent.parent
 ASSET_ROOT = PROJECT_ROOT / "assets"
+
+# Root of the downloadable SkillWeaver data bundle (scenes / assets / ckpts / misc).
+# Set the SKILLWEAVER_DATA_ROOT env var to wherever you extracted it; see README.
+SKILLWEAVER_DATA_ROOT = os.environ.get("SKILLWEAVER_DATA_ROOT", "your_path_to_skillweaver_root")
+# The prefix scene JSONs were authored with; rewritten to scene_asset_root_path at load.
+LEGACY_SCENE_ASSET_ROOT = "/data/group_data/katefgroup-ssd/sim_scene_gen"
 # Mean values from IsaacLabEnvs EventCfg (friction 0.6-1.2, mass scale 0.4-2.0).
 EVENT_MEAN_STATIC_FRICTION = 1.0
 EVENT_MEAN_DYNAMIC_FRICTION = 1.0
@@ -96,8 +103,9 @@ WIDOWX_ROBOT_CFG: ArticulationCfg = ArticulationCfg(
 
 @configclass
 class BaseEnvCfg(DirectRLEnvCfg):
-    # Global root for all non-absolute asset paths from scene description.
-    scene_asset_root_path: str = "/data/group_data/katefgroup-ssd/sim_scene_gen"
+    # Global root for all asset paths from scene description (relative refs are joined
+    # with this; legacy-absolute refs are rewritten onto it at load — see base_env.py).
+    scene_asset_root_path: str = os.path.join(SKILLWEAVER_DATA_ROOT, "sim_scene_gen")
 
     # env
     episode_length_s: float = 10.0

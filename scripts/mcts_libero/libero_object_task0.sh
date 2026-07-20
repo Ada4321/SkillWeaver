@@ -18,7 +18,9 @@ export PYTHONFAULTHANDLER=1
 
 USER=hez2
 
-cd /home/${USER}/code/Grounded_MCTS_IsaacLab
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+cd "${REPO_ROOT}"
+: "${SKILLWEAVER_DATA_ROOT:?set SKILLWEAVER_DATA_ROOT to the extracted SkillWeaver data bundle root (see README)}"
 source ~/miniconda3/etc/profile.d/conda.sh
 
 export NCCL_ASYNC_ERROR_HANDLING=1
@@ -58,7 +60,7 @@ resolve_python_bin() {
 # =========================
 # Batch scene selection
 # =========================
-SCENE_ROOT="${SCENE_ROOT:-/data/group_data/katefgroup-ssd/sim_scene_gen/scenes/libero/libero_object/task_0}"
+SCENE_ROOT="${SCENE_ROOT:-${SKILLWEAVER_DATA_ROOT}/sim_scene_gen/scenes/libero/libero_object/task_0}"
 # Supported formats: "1", "1,3,7", "10-15", "1,3,10-12"
 SCENE_IDS="${SCENE_IDS:-1}"
 
@@ -145,8 +147,8 @@ C_PUCT=0.5
 EVAL_NUM=1
 PROCESS_NUM=1
 
-PICK_CKPT="/home/hez2/code/IsaacLabEnvs/logs/rl_games/gripper/2026-02-19_06-40-46_pick_sam3d_general_8gpu_tablez0.25/nn/last_gripper_ep_9600_rew_1706.0063.pth"
-PICK_UPRIGHT_CKPT="/home/hez2/code/IsaacLabEnvs/logs/rl_games/gripper/2026-02-19_19-30-54_pick_sam3d_upright_gt10_4gpu/nn/last_gripper_ep_8400_rew_1541.1537.pth"
+PICK_CKPT="${SKILLWEAVER_DATA_ROOT}/ckpts/gripper_pick_general.pth"
+PICK_UPRIGHT_CKPT="${SKILLWEAVER_DATA_ROOT}/ckpts/gripper_pick_upright.pth"
 
 for scene_file in "${SCENE_FILES[@]}"; do
   scene_name="$(basename "$(dirname "$scene_file")")"
