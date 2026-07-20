@@ -18,7 +18,7 @@ MCTS-driven skill search + VLA data collection in IsaacLab.
    pip install -r requirements.txt
    ```
 
-## 1. Data bundle
+## 2. Data bundle
 
 The scripts under `scripts/` need scenes, assets, and RL checkpoints that live
 **outside** this repo. Download the SkillWeaver data bundle and point one env var
@@ -59,7 +59,7 @@ assets/backgrounds those scenes reference. Scene JSONs may embed absolute paths
 authored under the original data root; they are rewritten onto
 `SKILLWEAVER_DATA_ROOT` automatically at load ([simulators/base_env.py](simulators/base_env.py)).
 
-## 2. Config
+## 3. Config
 
 ```bash
 cp env.example .env && $EDITOR .env    # set SKILLWEAVER_DATA_ROOT + GEMINI_API_KEY
@@ -69,7 +69,7 @@ source .env
 `GEMINI_API_KEY` (or `GOOGLE_API_KEY`) is read by [skills/gemini.py](skills/gemini.py)
 for the VLM actor/judge.
 
-## 3. Run
+## 4. Run
 
 Scripts `cd` to the repo root themselves (paths inside the repo are repo-relative),
 so you can launch them from anywhere once the two env vars are set:
