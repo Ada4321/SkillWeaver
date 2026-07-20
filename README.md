@@ -8,8 +8,17 @@ The scripts under `scripts/` need scenes, assets, and RL checkpoints that live
 **outside** this repo. Download the SkillWeaver data bundle and point one env var
 at it — nothing in the repo hard-codes an absolute data path.
 
+**Download** `skillweaver_data.tar.gz` (~117 MB, `md5 6443cd7001970dfbf8eb8c2abd0931ac`)
+from [Google Drive](https://drive.google.com/file/d/1VP6sJGxixXyHOWoXV9lDUs-C3hM6Pl-O/view?usp=sharing):
+
 ```bash
-export SKILLWEAVER_DATA_ROOT=/path/where/you/extracted/skillweaver_data
+# direct download (handles Google Drive's large-file confirm token):
+pip install gdown && gdown 1VP6sJGxixXyHOWoXV9lDUs-C3hM6Pl-O
+# ...or grab it from the browser link above.
+
+md5sum -c <<< "6443cd7001970dfbf8eb8c2abd0931ac  skillweaver_data.tar.gz"   # verify
+tar -xzf skillweaver_data.tar.gz            # -> skillweaver_data/
+export SKILLWEAVER_DATA_ROOT="$(pwd)/skillweaver_data"
 ```
 
 Bundle layout:
