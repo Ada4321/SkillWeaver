@@ -23,6 +23,8 @@ import shutil
 import subprocess
 import sys
 
+USD_EXTS = (".usd", ".usda", ".usdc")
+
 SRC_SG = "/data/group_data/katefgroup-ssd/sim_scene_gen"
 DST_ROOT = "/data/user_data/hez2/skillweaver_data"
 
@@ -48,23 +50,34 @@ MISC = {
 
 ASSET_EXCLUDES = ["raw_images/", "*_ORIG.usd", "*.bak*", ".asset_hash"]
 
-# tokens that look like an asset path inside a USD (crate blobs still hold plaintext paths)
-_DEP_RE = re.compile(r"[@\"']?([A-Za-z0-9_./-]+\.(?:usd|usda|usdc|png|jpg|jpeg|obj|mtl))[@\"']?")
-
-
-def usd_deps(usd_path):
-    """Return relative dep paths referenced by a USD (best-effort via strings)."""
+# USD files are compressed crate (PXR-USDC); their asset paths can't be scraped with
+# `strings`. Resolve them authoritatively with pxr, run in the isaaclab conda env.
+_PXR_RESOLVER = r'''
+import sys, json
+from pxr import UsdUtils, Sdf
+out = {}
+for p in sys.argv[1:]:
     try:
-        out = subprocess.run(["strings", usd_path], capture_output=True, text=True, timeout=60).stdout
-    except Exception:
-        return []
-    deps = set()
-    for m in _DEP_RE.finditer(out):
-        p = m.group(1)
-        if p.startswith("/") or p.startswith("./") is False and "/" not in p and p == os.path.basename(usd_path):
-            continue
-        deps.add(p)
-    return sorted(deps)
+        layers, assets, _ = UsdUtils.ComputeAllDependencies(Sdf.AssetPath(p).path)
+        out[p] = sorted(set([l.identifier for l in layers] + list(assets)))
+    except Exception as e:
+        out[p] = {"__error__": str(e)}
+print(json.dumps(out))
+'''
+
+
+def usd_deps_pxr(usd_paths):
+    """Return {usd_path: [dep abs paths incl the usd itself]} via pxr in the isaaclab env."""
+    if not usd_paths:
+        return {}
+    cmd = ("source ~/miniconda3/etc/profile.d/conda.sh && conda activate isaaclab && "
+           "python - " + " ".join(f'"{p}"' for p in usd_paths))
+    r = subprocess.run(["bash", "-lc", cmd], input=_PXR_RESOLVER,
+                       capture_output=True, text=True, timeout=600)
+    line = [l for l in r.stdout.splitlines() if l.startswith("{")]
+    if not line:
+        sys.exit(f"pxr resolver produced no output (need isaaclab env with pxr).\n{r.stderr[-800:]}")
+    return json.loads(line[-1])
 
 
 def collect():
@@ -93,33 +106,27 @@ def collect():
 
 
 def resolve_background(bg_refs):
-    """Map referenced background/... relative refs to the concrete source paths to copy.
+    """Map referenced background/... refs to the exact concrete source files to copy.
 
-    Per-category rules (the USDs are compressed crate, so we resolve texture deps by
-    the dataset's layout conventions instead of parsing the binaries):
-      floors/*      -> copy the whole background/floors dir (tiny, 6.7M; self-contained)
-      walls/<s>.usd -> copy the usd + textures/<s>_tex.png (verified 1:1 convention)
-      tables/*      -> copy the referenced usd + the whole tables/usd/textures dir
-                       (the crate usd's texture binding is not statically resolvable)
-      everything else (lightings .exr, poster_overlay .png, ...) -> copy the file as-is
+    Non-USD refs (lighting .exr, poster .png) are taken as-is. USD refs are resolved
+    authoritatively with pxr (UsdUtils.ComputeAllDependencies) so only the actually-
+    bound textures/meshes come along -- e.g. simpler_table.usd pulls one 2.2M png,
+    not the whole 445M tables/usd/textures tree.
     """
     out = set()
+    usd_refs = []
     for r in bg_refs:
-        parts = r.split("/")
-        cat = parts[1] if len(parts) > 1 else ""
-        if cat == "floors":
-            out.add(os.path.join(SRC_SG, "background/floors"))
-        elif cat == "walls" and r.endswith(".usd"):
-            out.add(os.path.join(SRC_SG, r))
-            stem = os.path.splitext(os.path.basename(r))[0]
-            tex = os.path.join(SRC_SG, "background/walls/textures", f"{stem}_tex.png")
-            if os.path.isfile(tex):
-                out.add(tex)
-        elif cat == "tables":
-            out.add(os.path.join(SRC_SG, r))
-            out.add(os.path.join(SRC_SG, "background/tables/usd/textures"))
-        else:
-            out.add(os.path.join(SRC_SG, r))
+        p = os.path.join(SRC_SG, r)
+        out.add(p)
+        if r.endswith(USD_EXTS):
+            usd_refs.append(p)
+    deps = usd_deps_pxr(usd_refs)
+    for usd, dlist in deps.items():
+        if isinstance(dlist, dict):  # {"__error__": ...}
+            sys.exit(f"pxr failed to resolve {usd}: {dlist['__error__']}")
+        for d in dlist:
+            if os.path.isfile(d):
+                out.add(d)
     return sorted(out)
 
 
