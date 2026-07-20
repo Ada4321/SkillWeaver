@@ -67,16 +67,3 @@ bash scripts/mcts_simpler/data_collect_carrot_on_plate_vlm.sh
 
 Collected trajectories are written under `SAVE_ROOT` (defaults to `output/…`;
 override with `SAVE_ROOT=…`).
-
-## 4. Rebuilding the bundle (maintainers)
-
-`tools/build_data_bundle.py` regenerates the bundle from the source data tree by
-parsing each task's `scene_0001` and copying exactly the referenced asset dirs,
-backgrounds, ckpts, and misc files:
-
-```bash
-python tools/build_data_bundle.py            # dry-run: prints manifest + size
-python tools/build_data_bundle.py --execute  # copy into DST_ROOT
-```
-
-Edit `TASKS` / `SCENE_IDS` in that file to widen coverage beyond `scene_0001`.
