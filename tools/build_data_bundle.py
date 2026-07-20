@@ -3,7 +3,8 @@
 
 Collects, for each task's scene_0001, exactly the files the code loads:
   - the scene dir (self-contains scene_XXXX.json + layouts/table_z/cam_poses/tasks npz)
-  - every referenced asset_XXXX dir (minus raw_images/, *_ORIG.usd, *.bak*)
+  - per referenced asset_XXXX dir: only the ASSET_INCLUDE_GLOBS allowlist (coacd_final.usd,
+    pcds, sibling json, urdf+convex) — drops coacd_base.usd, both .ply, previews, etc.
   - every referenced background file (+ transitive USD deps)
   - the 3 RL pick ckpts
   - external single config files (surface list, widowx rl_games cfg)
@@ -48,7 +49,33 @@ MISC = {
     "/home/hez2/code/IsaacLabEnvs/isaaclabenvs/tasks/widowx/agents/rl_games_ppo_cfg.yaml": "misc/widowx_rl_games_ppo_cfg.yaml",
 }
 
-ASSET_EXCLUDES = ["raw_images/", "*_ORIG.usd", "*.bak*", ".asset_hash"]
+# Per-asset allowlist: the ONLY files the sim/skills actually load from an asset dir
+# (verified by tracing simulators/skills against scene_desc — see the audit). Everything
+# else (coacd_base.usd + configuration/, both .ply meshes, _pose/_quat/_simplified,
+# retrieved_assets.json, rendered_images/, raw_images/, *_ORIG.usd, logs) is dead weight.
+#   final_usd_path -> coacd_final.usd (self-contained; no coacd_base/configuration dep)
+#   point_cloud    -> asset_*_pcd.npz (+ all side/top/half variants; each ~30KB)
+#   handle_side    -> asset_*.json (sibling json, read for handle_side)
+#   urdf_path      -> coacd.urdf + convex pieces (only used for articulated objs; kept, tiny)
+ASSET_INCLUDE_GLOBS = [
+    "*/",                          # descend into subdirs
+    "coacd_final.usd",
+    "coacd.urdf",
+    "coacd_convex_piece_*.obj",
+    "asset_*.json",
+    "asset_*_pcd.npz",
+]
+
+
+def _asset_keep(fname):
+    import fnmatch
+    if fname == "coacd_final.usd" or fname == "coacd.urdf":
+        return True
+    if fnmatch.fnmatch(fname, "coacd_convex_piece_*.obj"):
+        return True
+    if fnmatch.fnmatch(fname, "asset_*.json") or fnmatch.fnmatch(fname, "asset_*_pcd.npz"):
+        return True
+    return False
 
 # USD files are compressed crate (PXR-USDC); their asset paths can't be scraped with
 # `strings`. Resolve them authoritatively with pxr, run in the isaaclab conda env.
@@ -130,29 +157,30 @@ def resolve_background(bg_refs):
     return sorted(out)
 
 
-def rsync(src, dst, execute, excludes=()):
+def rsync(src, dst, execute, includes=None, excludes=()):
     os.makedirs(os.path.dirname(dst.rstrip("/")), exist_ok=True)
-    cmd = ["rsync", "-a"]
+    cmd = ["rsync", "-a", "--prune-empty-dirs"] if includes else ["rsync", "-a"]
     if not execute:
         cmd += ["-n", "--stats"]
+    for i in (includes or []):
+        cmd += ["--include", i]
+    if includes:
+        cmd += ["--exclude", "*"]
     for e in excludes:
         cmd += ["--exclude", e]
     cmd += [src, dst]
     return subprocess.run(cmd, capture_output=True, text=True)
 
 
-def size_of(paths, excludes=None):
+def size_of(paths, asset_allowlist=False):
     total = 0
     for p in paths:
         if os.path.isfile(p):
             total += os.path.getsize(p)
         elif os.path.isdir(p):
             for root, dirs, files in os.walk(p):
-                if excludes and "raw_images" in os.path.basename(root):
-                    dirs[:] = []
-                    continue
                 for fn in files:
-                    if excludes and (fn.endswith("_ORIG.usd") or ".bak" in fn or fn == ".asset_hash"):
+                    if asset_allowlist and not _asset_keep(fn):
                         continue
                     fp = os.path.join(root, fn)
                     if os.path.isfile(fp):
@@ -169,13 +197,13 @@ def main():
     bg_paths = resolve_background(bg_refs)
 
     print(f"scene dirs      : {len(scene_dirs)}")
-    print(f"asset dirs      : {len(asset_dirs)}  (excl {ASSET_EXCLUDES})")
+    print(f"asset dirs      : {len(asset_dirs)}  (allowlist: {ASSET_INCLUDE_GLOBS[1:]})")
     print(f"background paths: {len(bg_paths)}  (from {len(bg_refs)} refs)")
     print(f"ckpts           : {len(CKPTS)}")
     print(f"misc            : {len(MISC)}")
 
     gb = 1024 ** 3
-    sz = (size_of(scene_dirs) + size_of(asset_dirs, excludes=True)
+    sz = (size_of(scene_dirs) + size_of(asset_dirs, asset_allowlist=True)
           + size_of(bg_paths) + size_of(list(CKPTS)) + size_of(list(MISC)))
     print(f"\nestimated bundle size: {sz/gb:.2f} GB\n")
 
@@ -198,7 +226,7 @@ def main():
     for adir in asset_dirs:
         rel = os.path.relpath(adir, SRC_SG)
         dst = os.path.join(DST_ROOT, "sim_scene_gen", rel) + "/"
-        rsync(adir + "/", dst, True, excludes=ASSET_EXCLUDES)
+        rsync(adir + "/", dst, True, includes=ASSET_INCLUDE_GLOBS)
     # backgrounds (files or whole dirs, per resolve_background rules)
     for p in bg_paths:
         rel = os.path.relpath(p, SRC_SG)
