@@ -1,0 +1,51 @@
+# @package _global_
+
+defaults:
+  - /simulator: isaaclab
+  - /env: default
+  - _self_
+
+hydra:
+  job:
+    chdir: false
+  run:
+    dir: .
+  output_subdir: null
+
+simulator:
+  isaaclab:
+    task: GroundedBase-v0
+
+replay:
+  # Required: root directory to scan for **/traj/*.npz
+  input_dir: null
+
+  # If null, instruction is read from result_json.
+  instruction: null
+
+  # "auto": use cmd if available (replan-mode data), else joint_target.
+  # "cmd": force delta EE cmd replay (action_mode=1); error if keys absent.
+  # "joint_target": absolute joint target replay (action_mode=0), uses action/arm_joint_targets.
+  # "joint_actual": absolute joint actual replay (action_mode=0), uses action/arm_joint_actual + action/gripper_targets.
+  action_source: auto
+
+  settle_steps: 20
+  # On some runs, camera prims are not ready during the first reset (traj0),
+  # so camera local_pose restore can no-op. Reapply reset params once after warmup.
+  reapply_reset_params_after_warmup: true
+  max_steps: null
+
+  video:
+    enabled: false
+    fps: 20
+    views:
+      - front
+
+  compare:
+    enabled: true
+    eef_pos_tol: 0.02
+    gripper_pos_tol: 0.01
+
+env:
+  # Replay consumes saved commands; disable EMA to avoid double smoothing.
+  action_ema_alpha: 0.0

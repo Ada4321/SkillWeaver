@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+
+# Run outputs / caches
+output/
+tmp_outputs/
+nv_shadercache/
+_write_test_root/
+*.log
+slurm-*.out
+
+# Editor / tooling
+.codex/
+.agents/
+.claude/
+.vscode/
+.idea/
+.DS_Store
+
+# Secrets — never commit real API keys
+*.env
+.env

@@ -1,0 +1,174 @@
+max_depth: 10
+rollout_max_steps: 5   # only used when rollout_mode=standard_rollout
+# rollout_mode: one of
+#   judge_rollout     - subgoal+progress judge on each new child; reward = progress_score
+#   no_rollout        - backprop 0; call progress-only judge only when child reaches max_depth
+#   standard_rollout  - roll forward rollout_max_steps (throwaway, off-tree), progress-only judge at end
+rollout_mode: no_rollout
+n_rollouts_per_node: 2
+# selection_mode: one of
+#   ucb               - standard UCB-max descent (used by judge_rollout / standard_rollout)
+#   random            - uniform random pick at the UCB step (still random over unvisited first)
+# Constraint: rollout_mode=no_rollout REQUIRES selection_mode=random (init raises otherwise),
+# since UCB over all-zero rewards is uninformative.
+selection_mode: ucb
+actor_concurrency: 16
+judge_concurrency: 16
+n_simulations: 10
+c_puct: 2.0
+avoid_terminal_in_selection: true   # prefer non-terminal nodes during UCB selection to explore more branches
+num_children_per_expand: 3
+max_num_try_per_expansion: 1
+max_plan_retries_per_child: 1
+max_execute_retries_per_plan: 1
+max_dead_end_count: 3
+backprop_dead_end: false
+use_history: false
+mode: stop_if_any_success
+target_success_count: 3   # keep searching until this many distinct success paths are found
+use_depth_reward: false
+use_move_without_place: false   # opt-in: expose move_without_place skill to VLM Actor
+use_open_drawer: false          # opt-in: expose open_drawer skill (multi-DOF cabinet) to VLM Actor
+use_close_drawer: false         # opt-in: expose close_drawer skill to VLM Actor
+use_close_door: false           # opt-in: expose close_door skill (revolute microwave door) to VLM Actor
+data_collection_mode: true
+save_restore_augmented_traj: false
+save_original_also_when_augmented: false
+save_tree_observations: true
+save_tree_pcd: true
+tasks:
+  task_key: tasks
+  surface_tgt_list: /home/hez2/code/SceneGen_IsaacLab/asset_gen/asset_post_process/surface_list_0305.txt
+  force_upright: false
+  upright_random_prob: 0.5
+  layout_ids: null
+  task_ids: null
+prompts:
+  actor_system:
+    use_open_dir: false  # world-frame opening dir of arti containers (base + per part)
+    use_arti_parts: false  # show arti parts (drawer/door center+AABB+state) inline in the phase-1 object list
+    use_3d_center: true
+    use_3d_range: true
+    use_2d_range: false
+    use_grasp_info: true
+    use_axis_annotation: false
+    use_upright_status: true
+  actor_pick:
+    use_3d_center: false
+    use_3d_range: false
+    use_2d_range: false
+    use_grasp_info: false
+    use_axis_annotation: false
+    use_coordinate_system: false
+    use_upright_status: false
+  actor_open_drawer:
+    use_3d_center: false
+    use_3d_range: false
+    use_2d_range: false
+    use_grasp_info: false
+    use_axis_annotation: false
+    use_coordinate_system: false
+    use_upright_status: true
+    use_arti_only: true        # object_information = the cabinet's part list only (each part: center+AABB+state, flat Asset index)
+  actor_close_drawer:
+    use_3d_center: false
+    use_3d_range: false
+    use_2d_range: false
+    use_grasp_info: false
+    use_axis_annotation: false
+    use_coordinate_system: false
+    use_upright_status: true
+    use_arti_only: true
+  actor_close_door:
+    use_3d_center: false
+    use_3d_range: false
+    use_2d_range: false
+    use_grasp_info: false
+    use_axis_annotation: false
+    use_coordinate_system: false
+    use_upright_status: true
+    use_arti_only: true
+  actor_place:
+    use_open_dir: false  # world-frame opening dir of arti containers (base + per part)
+    use_arti_parts: true   # objects + arti parts share one flat Asset index space (part = valid place target)
+    use_3d_center: true
+    use_3d_range: true
+    use_2d_range: false
+    use_grasp_info: false
+    use_axis_annotation: false
+    use_coordinate_system: true
+    use_upright_status: false
+  actor_place_with_drop:
+    use_open_dir: false  # world-frame opening dir of arti containers (base + per part)
+    use_arti_parts: true
+    use_3d_center: true
+    use_3d_range: true
+    use_2d_range: false
+    use_grasp_info: false
+    use_axis_annotation: false
+    use_coordinate_system: true
+    use_upright_status: false
+  actor_move_held_object:
+    use_3d_center: true
+    use_3d_range: true
+    use_2d_range: false
+    use_grasp_info: false
+    use_axis_annotation: false
+    use_coordinate_system: false
+    use_upright_status: true
+  actor_rotate_held_object:
+    use_3d_center: false
+    use_3d_range: false
+    use_2d_range: false
+    use_grasp_info: false
+    use_axis_annotation: true
+    use_coordinate_system: false
+    use_upright_status: true
+  actor_place_with_orientation:
+    use_open_dir: false  # world-frame opening dir of arti containers (base + per part)
+    use_arti_parts: true
+    use_3d_center: true
+    use_3d_range: true
+    use_2d_range: false
+    use_grasp_info: false
+    use_axis_annotation: true
+    use_coordinate_system: true
+    use_upright_status: true
+  actor_place_with_orientation_drop:
+    use_open_dir: false  # world-frame opening dir of arti containers (base + per part)
+    use_arti_parts: true
+    use_3d_center: true
+    use_3d_range: true
+    use_2d_range: false
+    use_grasp_info: false
+    use_axis_annotation: true
+    use_coordinate_system: true
+    use_upright_status: true
+  actor_place_with_gripper_orientation_drop:
+    use_open_dir: true  # world-frame opening dir of arti containers (base + per part)
+    use_arti_parts: true
+    use_3d_center: true
+    use_3d_range: true
+    use_2d_range: false
+    use_grasp_info: false
+    use_axis_annotation: true
+    use_coordinate_system: true
+    use_upright_status: true
+  actor_move_without_place:
+    use_3d_center: true
+    use_3d_range: true
+    use_2d_range: false
+    use_grasp_info: false
+    use_axis_annotation: true
+    use_coordinate_system: false
+    use_upright_status: true
+  judge:
+    use_open_dir: false  # world-frame opening dir of arti containers (base + per part)
+    use_3d_center: true
+    use_3d_range: true
+    use_2d_range: false
+    use_grasp_info: true
+    use_axis_annotation: false
+    use_coordinate_system: true
+    use_upright_status: true
+    use_arti_parts: true    # show each cabinet's parts (state+center+AABB, per-side snapshot) in both before/after object_info

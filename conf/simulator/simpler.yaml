@@ -1,0 +1,24 @@
+# simpler simulator preset: WidowX robot + 4:3 bridge-aspect data collection,
+# front-only (bridge has no wrist camera). Inherits conf/simulator/isaaclab.yaml;
+# only the fields below differ (deep-merged, lists replaced).
+#
+# Aspect chain: front_camera renders 640x480 (env=simpler_table/sink) -> the
+# data_collect stretch-resize (isaaclab.py:_resize_array_for_collection) keeps
+# 4:3 here so it does NOT distort -> openpi resize_with_pad -> 224x168 + bars,
+# matching bridge training.
+
+defaults:
+  - isaaclab
+  - _self_
+
+isaaclab:
+  robot_name: widowx
+  # rl_games network cfg the RL-policy player is built from -- must match the
+  # WidowX training run (WidowX-Pick-v0), not the Franka agent cfg.
+  agent_cfg_file: /home/hez2/code/IsaacLabEnvs/isaaclabenvs/tasks/widowx/agents/rl_games_ppo_cfg.yaml
+  data_collect_w: 640        # 4:3, same aspect as the 640x480 camera render
+  data_collect_h: 480
+  camera_names:              # front only: bridge has no wrist camera, top unused
+    - front
+  data_collect_camera_names:
+    - front                  # bridge has no wrist camera

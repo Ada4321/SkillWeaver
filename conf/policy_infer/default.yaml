@@ -1,0 +1,18 @@
+host: "0.0.0.0"
+port: 8000
+resize_size: 224
+replan_steps: 5
+action_format: "raw"  # raw: policy outputs normalized action_raw; cmd: policy outputs scaled action_cmd
+disable_action_ema: true
+
+num_steps_wait: 10
+max_steps: 200
+num_episodes: 1
+
+camera_front: "front"
+camera_wrist: "wrist"
+
+task_kwargs_json: ""
+video_out_path: "output/pi05_infer/videos"
+save_vla_traj: false
+traj_out_path: "output/pi05_infer/traj"

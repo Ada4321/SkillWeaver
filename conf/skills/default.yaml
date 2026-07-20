@@ -1,0 +1,95 @@
+vlm:
+  # gemini (default) | claude_bridge: file bridge answered by a live Claude Code
+  # agent (skills/claude_bridge.py). Bridge runs pair with actor/judge concurrency 1.
+  provider: gemini
+  model: gemini-2.5-pro
+  max_new_tokens: 8192
+  temperature: 1.0
+  top_p: 0.95
+  top_k: 10
+  # claude_bridge only. bridge_dir null -> <run cwd>/claude_bridge; a timestamped
+  # subdir is created per run (path is logged at startup).
+  bridge_dir: null
+  bridge_poll_interval: 2.0
+  bridge_timeout_s: 3600.0
+curobo:
+  grasp_select_mode: score
+  # Asset names dropped from cuRobo's collision world for this run (e.g. clutter that blocks a
+  # recessed drawer grasp). The arm will NOT avoid them -- only use for objects not being
+  # manipulated. CLI: skills.curobo.ignore_collision_assets=[plate]
+  ignore_collision_assets: []
+  align_empty_gripper_wrist_to_world_z: false
+  preserve_object_position_on_fallback: false
+  place_preserve_object_position_on_fallback: true
+  min_grasp_hold_steps: 5
+  max_grasp_hold_steps: 10
+  grasp_hold_lin_vel_thresh: 0.001
+  grasp_hold_ang_vel_thresh: 0.02
+  grasp_hold_disable_ema: true
+  min_place_hold_steps: 2
+  max_place_hold_steps: 2
+  place_hold_lin_vel_thresh: 0.001
+  place_hold_ang_vel_thresh: 0.02
+  place_hold_disable_ema: true
+  # Place-alignment relaxation ladder (place_with_orientation / place_with_gripper_orientation_drop,
+  # both RL and drop): try strict axis alignment first, then retry with the axis-angle
+  # tolerance widened by step until max (the cap itself is always tried; each tier repeats
+  # the free-axis sweep). 0 = strict only (previous behavior).
+  # CLI: skills.curobo.place_align_relax_max_deg=15
+  place_align_relax_max_deg: 0.0
+  place_align_relax_step_deg: 5.0
+  # Arti open/close Stage-A: try up to N sampled init poses (handle_grasps / closepush_init)
+  # before failing the skill; 1 = old single-sample behavior.
+  drawer_init_max_samples: 5
+  # Canonical EE pose (base frame == world frame on IsaacLab) used as the release
+  # fallback when primary release motion-planning fails. Derived from libero_10
+  # task=0 init=0 home pose via cuRobo FK. Format: [x, y, z, qw, qx, qy, qz].
+  # Set to null to disable this fallback layer.
+  release_fallback_ee_pose: [0.470, -0.006, 0.389, 0.001, -0.9998, 0.012, -0.015]
+  planner_execute_mode1_replan: false
+  planner_replan_every_k_steps: 5
+  planner_goal_pos_tolerance_m: 0.01
+  planner_goal_rot_tolerance_rad: 0.10
+  planner_max_replans: 5
+  planner_skip_points_after_first_plan: 0
+  # Handle-grasp drive (open_drawer Stage-A): per-finger jaw opening [m] the narrow planner
+  # locks the fingers at AND the drive commands. Sweet spot between the two constraints:
+  # finger sphere vs the grasped bar (wants W large; ~2.4mm margin at 0.012 flaked in cuRobo)
+  # and fingertip vs the next handle down (wants W small; >3cm slack). 0.02 gives ~1cm both ways.
+  narrow_finger_width: 0.02
+  # Arti Stage-A init: max distinct init poses resampled from the part's handle_grasps npz and
+  # cuRobo-tried until one is reachable (open/close_drawer/close_door). More = better coverage of
+  # marginal parts (e.g. middle drawer) at the cost of extra IK calls only when init fails.
+  part_init_max_samples: 20
+server:
+  rl_policy:
+    host: 127.0.0.1
+    port: 9080
+    timeout_s: 60.0
+rl:
+  backend: local
+  use_grasp: ${simulator.isaaclab.enable_pick}
+  use_place: ${simulator.isaaclab.enable_place}
+  use_pose: ${simulator.isaaclab.enable_pose}
+  use_open_drawer: ${simulator.isaaclab.enable_open_drawer}
+  use_close_drawer: ${simulator.isaaclab.enable_close_drawer}
+  use_close_door: ${simulator.isaaclab.enable_close_door}
+  pick_ckpt: null
+  pick_upright_ckpt: null
+  pick_convex_ckpt: null
+  pick_convex_lying_ckpt: null
+  pick_handle_ckpt: null
+  upright_list: /home/hez2/code/Grounded_MCTS_IsaacLab/data/assets_for_agent/pick_upright.txt
+  convex_list: /home/hez2/code/Grounded_MCTS_IsaacLab/data/assets_for_agent/pick_convex.txt
+  handle_list: /home/hez2/code/Grounded_MCTS_IsaacLab/data/assets_for_agent/pick_handle.txt
+  handle_pcd_agents: [pick_handle]
+  place_align_cup_bottom: false
+  place_ckpt: null
+  place_upright_ckpt: null
+  place_upright_list: /home/hez2/code/Grounded_MCTS_IsaacLab/data/assets_for_agent/place_upright.txt
+  place_upright_tgt_cos_threshold: 0.866
+  place_upright_gripper_cos_threshold: 0.707
+  pose_ckpt: null
+  open_drawer_ckpt: null
+  close_drawer_ckpt: null
+  close_door_ckpt: null

@@ -1,0 +1,92 @@
+scene_desc_file: null
+decimation: null  # null = use BaseEnvCfg default (25); set e.g. env.decimation=10 to override
+# Release execution mode: false = PD drive tracking (default; bounded contact forces,
+# grazing the placed object nudges instead of ejecting). true = legacy per-step joint
+# teleport (old sticky-release workaround; penetration impulses can eject the object).
+# CLI: env.release_teleop_joint_state=true
+release_teleop_joint_state: false
+init_arm_pos_files:
+  - "/home/hez2/code/Grounded_MCTS_IsaacLab/data/init_arm_qpos_cano_aug.npz"
+  - "/home/hez2/code/Grounded_MCTS_IsaacLab/data/init_arm_qpos_cano_all_init.npz"
+  - "/home/hez2/code/Grounded_MCTS_IsaacLab/data/init_arm_qpos_xy0.05.npz"
+  - "/home/hez2/code/Grounded_MCTS_IsaacLab/data/init_arm_qpos_real_near.npz"
+randomize_xy: false
+randomize_xy_range: 0.05
+# When true, objects whose category is listed in env.half_pcd_list swap their
+# pick-policy obs point cloud for the pre-generated <stem>_half_pcd.npz
+# (handle half + 12.5% L into the head side). Full pcd remains in
+# object_point_clouds for grasp-judge / 3d range / other uses.
+use_half_pcd: false
+half_pcd_list: /home/hez2/code/Grounded_MCTS_IsaacLab/data/assets_for_agent/half_pcd.txt
+test_layout_id: []
+split: train
+layout_sample_weights: null   # 4 front->back quartile masses; null = default [4,3,2,1]
+table_init_pos: [0.5, 0.0, 0.05]
+table_init_rot: [1.0, 0.0, 0.0, 0.0]
+table_z_range: [-0.05, 0.0]
+max_table_surface_height: 0.18
+table_disable_prob: 0.0
+no_table_floor_above_ground: 0.001
+no_table_virtual_table_size: [1.0, 1.0, 0.001]
+hide_moveable_ground_visual: true
+enable_scene_visual_floor: true
+enable_scene_visual_walls: true
+debug_floor_material_binding: false
+front_camera_count: 1
+# Camera intrinsics. Leave null to use BaseEnvCfg defaults
+# (front/top: focal=24, h_aperture=20.955; wrist: focal=24, h_aperture=36.8317).
+front_camera:
+  spawn:
+    focal_length: null
+    focus_distance: null
+    horizontal_aperture: null
+    clipping_range: null
+top_camera:
+  spawn:
+    focal_length: null
+    focus_distance: null
+    horizontal_aperture: null
+    clipping_range: null
+wrist_camera:
+  spawn:
+    focal_length: null
+    focus_distance: null
+    horizontal_aperture: null
+    clipping_range: null
+front_camera_aug_radius_ranges: "0.8:1.4"
+front_camera_aug_azimuth_ranges_deg: "-150.0:-120.0,-70.0:70.0;120.0:150.0"
+front_camera_aug_elevation_ranges_deg: "15.0:50.0"
+front_camera_aug_sampling_mode: triangular
+front_camera_aug_radius_mode: 1.0
+front_camera_aug_azimuth_mode_deg: 0.0
+front_camera_aug_elevation_mode_deg: 30.0
+# Lookat-Z augmentation. null = legacy "lock to table surface" behavior.
+# Set e.g. "0.03:0.23" with mode 0.13 to sample lookat Z each episode and
+# break the table-surface lock (useful for sim-to-real DR).
+front_camera_aug_lookat_z_ranges: null
+front_camera_aug_lookat_z_mode: null
+# Front-camera FoV (horizontal_aperture) augmentation. false = sim camera uses
+# the cfg.front_camera.spawn.horizontal_aperture value verbatim. true = pre-sample
+# bakes per-layout aperture into cam_poses.npz (8th dim) and runtime applies it.
+enable_front_camera_fov_augmentation: false
+front_camera_fov_aperture_range_mm: [18.78, 30.0]
+front_camera_fov_aperture_mode_mm: null
+front_camera_fov_dynamic_min_margin_deg: 5.0
+front_camera_fov_objects_to_fit: "all"
+dome_light_texture_aug_prob: 0.5
+dome_light_color_aug_prob: 0.2
+dome_light_intensity_range: [800, 2000]
+floor_z_range: [-1.0, -0.7]
+actuators:
+  panda_shoulder:
+    stiffness: null
+    damping: null
+    effort_limit_sim: null
+  panda_forearm:
+    stiffness: null
+    damping: null
+    effort_limit_sim: null
+  panda_hand:
+    stiffness: null
+    damping: null
+    effort_limit_sim: null

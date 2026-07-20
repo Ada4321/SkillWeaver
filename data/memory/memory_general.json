@@ -1,0 +1,70 @@
+{
+  "place beside target": {
+    "value": "Put A to a curtain side of B means to put A onto the vacant spot on the supporting surface BESIDE B, NOT on B. Also, you should make sure the axis-aligned bounding boxes of A and B have a gap of 2-5 cm between them along the axis of interest. You should determine the axis of interest and definition of left, right, front, back, etc. based on the task instruction and coordinate system information.",
+    "tags": [
+      "actor_phase_2",
+      "judge"
+    ]
+  },
+  "align elongated object for insertion": {
+    "value": "When placing a thin, elongated object (spoon, pen, toothbrush) into a narrow-mouth container (cup, mug, vase), the actor's phase-2 grounder MUST align the object's long axis with the container's vertical axis. The judge MUST verify the object's final horizontal bounding box is contained within the container's opening.",
+    "tags": [
+      "actor_phase_2",
+      "judge"
+    ]
+  },
+  "straighten up objects": {
+    "value": "When straightening up an object, you should align the upright axis of the object with the world's vertical axis, and make sure the object is placed back to its original position on the supporting surface.",
+    "tags": [
+      "actor_phase_1",
+      "actor_phase_2",
+      "judge"
+    ]
+  },
+  "prepare container before insertion": {
+    "value": "When the destination container (cup, mug, bowl) is lying on its side, the actor's phase-1 planner MUST first create subgoals to pick it up and place it upright. BEFORE attempting to insert another object, the judge MUST verify the container's pose flag is 'upright'.",
+    "tags": [
+      "actor_phase_1",
+      "judge"
+    ]
+  },
+  "verify drawer is fully closed": {
+    "value": "When the subgoal is to shut a drawer or door, the judge MUST verify the object's final state flag is 'closed'. A state of 'partially open' is a failure, even if the object moved most of the way. The verification criterion MUST be the discrete state flag, not a simple position delta.",
+    "tags": [
+      "judge"
+    ]
+  },
+  "verify stowed height in closable containers": {
+    "value": "When placing an object into a drawer or other container that will be closed, the actor MUST first verify the object's height is less than the container's internal vertical clearance. The judge MUST reject the plan if the object's top z-bound would extend beyond the cabinet's opening for that container.",
+    "tags": [
+      "actor_phase_1",
+      "judge"
+    ]
+  },
+  "lay tall objects down in shallow drawers": {
+    "value": "When placing a tall object like a bottle into a shallow drawer, if its upright height exceeds the available clearance, the actor's grounder MUST orient it to lie on its side. Its long axis MUST be aligned horizontally, and the judge must verify its new vertical dimension (i.e., its diameter) fits.",
+    "tags": [
+      "actor_phase_2",
+      "judge"
+    ]
+  },
+  "place into side-opening container": {
+    "value": "When placing an object into a container with a side opening like a microwave or oven, the actor's planner MUST select a skill that controls the gripper's approach direction from the side. Standard top-down `place` skills are unsuitable and MUST be avoided as they will collide with the container's top.",
+    "tags": [
+      "actor_phase_1"
+    ]
+  },
+  "verify placement inside vs on top": {
+    "value": "When a subgoal is to place an object 'inside' a container, the judge MUST verify full bounding-box containment of the object within the container. An object resting on the container's top surface fails this check and MUST be rejected, as its upper z-bound will exceed the container's.",
+    "tags": [
+      "judge"
+    ]
+  },
+  "target just inside side opening": {
+    "value": "When placing an object into a container with a side opening like a microwave or cabinet, the actor's grounder MUST target a point for the object's center that is just inside the opening. The judge MUST verify the target point is within the container's bounds but close to the plane of the opening, not deep inside where the gripper cannot reach.",
+    "tags": [
+      "actor_phase_2",
+      "judge"
+    ]
+  }
+}

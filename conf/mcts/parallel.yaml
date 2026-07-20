@@ -1,0 +1,10 @@
+# Parallel MCTS: leaf parallelization across env pool slots.
+# Switch with:  python main.py mcts=parallel simulator.isaaclab.pool_size=4
+
+defaults:
+  - default   # inherit all mcts defaults
+
+_target_: tree_search.mcts_parallel.MCTSSearcherParallel
+
+# pool_size is read from simulator.isaaclab.pool_size at runtime.
+# k (leaves selected per round) = pool_size // num_children_per_expand

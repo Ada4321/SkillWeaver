@@ -1,0 +1,151 @@
+#usda 1.0
+(
+    defaultPrim = "panda"
+    subLayers = [
+        @./franka_gripper_new_v2.usd@
+    ]
+)
+
+over "panda"
+{
+    over "Looks" (
+        prepend references = @./configuration/franka_gripper_libero_obj_visual_base.usd@</panda/Looks>
+    )
+    {
+    }
+
+    over "panda_link0"
+    {
+        over "visuals" (
+            prepend references = @./configuration/franka_gripper_libero_obj_visual_base.usd@</panda/panda_link0/visuals>
+        )
+        {
+        }
+    }
+
+    over "panda_link1"
+    {
+        over "visuals" (
+            prepend references = @./configuration/franka_gripper_libero_obj_visual_base.usd@</panda/panda_link1/visuals>
+        )
+        {
+        }
+    }
+
+    over "panda_link2"
+    {
+        over "visuals" (
+            prepend references = @./configuration/franka_gripper_libero_obj_visual_base.usd@</panda/panda_link2/visuals>
+        )
+        {
+        }
+    }
+
+    over "panda_link3"
+    {
+        over "visuals" (
+            prepend references = @./configuration/franka_gripper_libero_obj_visual_base.usd@</panda/panda_link3/visuals>
+        )
+        {
+        }
+    }
+
+    over "panda_link4"
+    {
+        over "visuals" (
+            prepend references = @./configuration/franka_gripper_libero_obj_visual_base.usd@</panda/panda_link4/visuals>
+        )
+        {
+        }
+    }
+
+    over "panda_link5"
+    {
+        over "visuals" (
+            prepend references = @./configuration/franka_gripper_libero_obj_visual_base.usd@</panda/panda_link5/visuals>
+        )
+        {
+        }
+    }
+
+    over "panda_link6"
+    {
+        over "visuals" (
+            prepend references = @./configuration/franka_gripper_libero_obj_visual_base.usd@</panda/panda_link6/visuals>
+        )
+        {
+        }
+    }
+
+    over "panda_link7"
+    {
+        over "visuals" (
+            prepend references = @./configuration/franka_gripper_libero_obj_visual_base.usd@</panda/panda_link7/visuals>
+        )
+        {
+        }
+    }
+
+    over "panda_hand"
+    {
+        over "visuals" (
+            prepend references = @./configuration/franka_gripper_libero_obj_visual_base.usd@</panda/panda_hand/visuals>
+        )
+        {
+        }
+    }
+
+    over "panda_leftfinger"
+    {
+        over "visuals" (
+            prepend references = @./configuration/franka_gripper_libero_obj_visual_base.usd@</panda/panda_leftfinger/visuals>
+        )
+        {
+        }
+    }
+
+    over "panda_leftfinger_tip"
+    {
+        over "visuals" (
+            prepend references = @./configuration/franka_gripper_libero_obj_visual_base.usd@</panda/panda_leftfinger_tip/visuals>
+        )
+        {
+        }
+    }
+
+    over "panda_rightfinger"
+    {
+        over "visuals" (
+            prepend references = @./configuration/franka_gripper_libero_obj_visual_base.usd@</panda/panda_rightfinger/visuals>
+        )
+        {
+        }
+    }
+
+    over "panda_rightfinger_tip"
+    {
+        over "visuals" (
+            prepend references = @./configuration/franka_gripper_libero_obj_visual_base.usd@</panda/panda_rightfinger_tip/visuals>
+        )
+        {
+        }
+    }
+
+    over "panda_grip_site"
+    {
+        over "visuals" (
+            prepend references = @./configuration/franka_gripper_libero_obj_visual_base.usd@</panda/panda_grip_site/visuals>
+        )
+        {
+        }
+    }
+
+    over "wrist_camera_link"
+    {
+        over "visuals" (
+            prepend references = @./configuration/franka_gripper_libero_obj_visual_base.usd@</panda/wrist_camera_link/visuals>
+        )
+        {
+        }
+    }
+}

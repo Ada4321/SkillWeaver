@@ -1,0 +1,54 @@
+# Pretraining preset. Inherits from conf/env/default.yaml; only fields below
+# differ.
+#
+# What changes vs default:
+#   - lookat_z explicitly sampled in [-0.042, 0.025], decoupled from table z
+#     (range matches the libero_10 default lock-to-surface spread).
+#   - FoV aug enabled -> pre-sample writes 8-dim cam_poses.npz (aperture per
+#     layout); runtime reads it and per-episode writes the FrontCamera prim's
+#     horizontalAperture attribute.
+#   - Wrist switched to D435i intrinsic + baked URDF + +-5mm/+-2deg perturb.
+
+defaults:
+  - default
+  - _self_
+
+# Head spherical pose aug (aligned with scripts/sample_cam_alone_in_the_wild_0508.sh).
+# - radius widened to 0.8:1.6 (vs default 0.8:1.4) for a bit more pose variety.
+# - azimuth narrowed to +-20 deg (vs default's wide 3-segment range) to match
+#   the MCTS launch scripts' historical usage -- policy mostly sees front-facing
+#   cameras, same as deployment.
+# - elevation mode tweaked to 27.5 deg (vs default 30 deg).
+front_camera_aug_center: [0.5, 0.0, 0.05]
+front_camera_aug_radius_ranges: "0.8:1.4"
+front_camera_aug_azimuth_ranges_deg: "-20.0:20.0"
+front_camera_aug_elevation_mode_deg: 30
+
+# Head lookat (sampled in this range, independent of table_z).
+front_camera_aug_lookat_z_ranges: "-0.042:0.025"
+front_camera_aug_lookat_z_mode: -0.008
+
+# Head FoV aug (the main reason this preset exists).
+enable_front_camera_fov_augmentation: true
+front_camera_fov_aperture_range_mm: [18, 23.0]
+front_camera_fov_aperture_mode_mm: 20.95
+front_camera_fov_dynamic_min_margin_deg: 5.0
+front_camera_fov_objects_to_fit: "all"
+
+# Wrist intrinsics + baked URDF (same as sim2real preset).
+wrist_camera:
+  spawn:
+    focal_length: 24.0
+    horizontal_aperture: 19.0085
+robot:
+  spawn:
+    # Base USD (no libero MDL material overlay) — same baked wrist geometry,
+    # default URDF-imported visuals (no _xml_overlay.usda).
+    usd_path: /home/hez2/code/Grounded_MCTS_IsaacLab/assets/franka_gripper/usd/franka_gripper_libero_visual_wrist_palmback_5cm_tilt15.usd
+
+# Wrist mount DR. Picks one of the 6 visually-verified combos in
+# wrist_camera_aug_combos (BaseEnvCfg default) uniformly ONCE per env
+# construction (= once per scene in typical shell loop), then bakes into
+# cfg.wrist_camera.offset before the camera is built. Aggregate DR comes
+# from running many scenes.
+enable_wrist_camera_pose_augmentation: true

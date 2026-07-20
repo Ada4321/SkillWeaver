@@ -1,0 +1,6 @@
+table
+desk
+counter
+shelf
+plate
+tray

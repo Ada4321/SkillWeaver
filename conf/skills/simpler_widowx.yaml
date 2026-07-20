@@ -1,0 +1,25 @@
+# Skills preset for WidowX (SimplerEnv bridge) data collection. Inherits
+# conf/skills/default.yaml; the WidowX RL stack has a SINGLE general pick
+# policy (IsaacLabEnvs WidowX-Pick-v0, train_widowx_general.sh) -- no
+# upright/convex/handle variants -- so all dispatch lists are emptied and
+# every pick resolves to the "pick" agent with the full object point cloud.
+#
+# Pair with simulator=simpler (robot_name widowx + widowx agent_cfg_file).
+
+defaults:
+  - default
+  - _self_
+
+rl:
+  # TODO: point at the trained checkpoint once the run finishes, e.g.
+  # /path/to/IsaacLabEnvs/logs/rl_games/gripper/<run>/nn/gripper.pth
+  pick_ckpt: null
+  pick_upright_ckpt: null
+  pick_convex_ckpt: null
+  pick_convex_lying_ckpt: null
+  pick_handle_ckpt: null
+  upright_list: null
+  convex_list: null
+  handle_list: null
+  top_pcd_agents: []
+  handle_pcd_agents: []

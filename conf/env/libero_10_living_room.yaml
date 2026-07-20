@@ -1,0 +1,39 @@
+# libero_10 LIVING_ROOM-scene preset: FIXED LIBERO agentview head camera (no pose/FoV aug).
+# Inherits conf/env/default.yaml; only the fields below differ.
+#
+# Calibrated from the COMPILED LIBERO living-room arena agentview (NOT the scene XML):
+#   - agentview world pose (0.6066, 0, 0.96), optical pitch 31.9 deg, fovy 45.
+#   - robot0_base at (-0.51, 0, 0.42) => agentview REL robot base (1.117, 0, 0.540).
+#   - This arena is a LOW/WIDE view: shallower pitch (31.9 vs tabletop 38.9) and a
+#     lower camera, so the look-at on the table top is rel-rb (0.271, 0, 0.013) with
+#     a shorter radius 0.997.
+#   - This repo's libero layouts are robot-base-relative (object world == LIBERO
+#     rel-rb; robot base = world origin), so the camera goes at the same relative
+#     pose: spherical about the table-top look-at (0.271, 0) with r/el/az below.
+# Data collection is 256x256; FoV is resolution-independent so 45 deg holds at 256.
+
+defaults:
+  - default
+  - _self_
+
+init_arm_pos_files:
+  - "/home/hez2/code/Grounded_MCTS_IsaacLab/data/init_arm_qpos_cano_aug.npz"
+  - "/home/hez2/code/Grounded_MCTS_IsaacLab/data/init_arm_qpos_cano_all_init.npz"
+
+# --- Head (front) camera = fixed LIBERO living-room agentview ---
+front_camera_aug_center: [0.271, 0.0, 0.05]    # look-at xy (z comes from lookat_z; center[2] is ignored by the sampler)
+front_camera_aug_radius_ranges: "0.997:0.997"
+front_camera_aug_radius_mode: 0.997
+front_camera_aug_azimuth_ranges_deg: "0.0:0.0"
+front_camera_aug_azimuth_mode_deg: 0.0
+front_camera_aug_elevation_ranges_deg: "31.9:31.9"
+front_camera_aug_elevation_mode_deg: 31.9
+front_camera_aug_lookat_z_ranges: null         # lock look-at to the table surface (where objects sit)
+front_camera_aug_lookat_z_mode: null
+
+# Fixed FoV = LIBERO agentview fovy 45 deg (no augmentation -> spawn aperture used verbatim).
+enable_front_camera_fov_augmentation: false
+front_camera:
+  spawn:
+    focal_length: 24.0
+    horizontal_aperture: 19.882                 # 2*24*tan(22.5 deg) -> 45 deg square FoV

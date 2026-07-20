@@ -1,0 +1,76 @@
+# Sim2real apple_banana preset. Inherits from conf/env/default.yaml.
+#
+# Mirrors /home/hez2/code/Real2Sim_IsaacLab/camera_sweep_apple_banana_cam1.10_0_0.43.sh
+# at the augment-range level:
+#   base lookat = (0.5, 0.0, 0.13)       ; sweep z in {0.03, 0.13, 0.23}
+#   base spherical around lookat:
+#     radius   = 0.671                    ; sweep {0.604, 0.671, 0.738}
+#     azimuth  = 0  deg                   ; sweep {-7, 0, +7}
+#     elevation = 26.57 deg               ; sweep {16.57, 26.57, 36.57}
+#   head horizontal_aperture = 18.78 mm  (D435i RGB narrow)
+#
+# Wrist: D435i intrinsic + baked URDF + +-5mm/+-2deg perturb (same as pretrain).
+#
+# Sweep on the spherical params is a +-band around the sim2real base (NOT pinned
+# to a single point); replace the ranges below with single-value "X:X" if you
+# want to lock to that base.
+
+defaults:
+  - default
+  - _self_
+
+init_arm_pos_files:
+  - /home/hez2/code/Grounded_MCTS_IsaacLab/data/init_arm_qpos_real_near.npz
+  - /home/hez2/code/Grounded_MCTS_IsaacLab/data/init_arm_qpos_real_near_1.npz
+
+# Table z: target top-surface z ~= [-0.05, +0.05] across the real_world 25-table
+# pool. Sampler interprets table_z_range as table CENTER z, so we shift the
+# desired surface band down by the pool-median h/2 = 0.017 -> [-0.067, +0.033].
+# max_table_surface_height = 0.05 clamps the upper end exactly; the lower end
+# drifts by +-0.01 depending on per-scene thickness (thinner -> lower).
+table_z_range: [-0.067, 0.033]
+max_table_surface_height: 0.05
+
+# Head pose: spherical aug around (0.5, 0, 0.13).
+front_camera_aug_center: [0.5, 0.0, 0.13]
+front_camera_aug_radius_ranges: "0.604:0.738"
+front_camera_aug_azimuth_ranges_deg: "-5.0:5.0"
+front_camera_aug_elevation_ranges_deg: "16.57:36.57"
+front_camera_aug_radius_mode: 0.671
+front_camera_aug_azimuth_mode_deg: 0.0
+front_camera_aug_elevation_mode_deg: 26.57
+
+# Head lookat z (decoupled from table surface; ~ Real2Sim apple_banana sweep).
+front_camera_aug_lookat_z_ranges: "0.08:0.23"
+front_camera_aug_lookat_z_mode: 0.15
+
+# Head aperture: D435i 18.78 mm (~43 deg FoV).
+front_camera:
+  spawn:
+    horizontal_aperture: 18.78
+
+# Wrist intrinsics + baked URDF.
+wrist_camera:
+  spawn:
+    focal_length: 24.0
+    horizontal_aperture: 19.0085
+robot:
+  spawn:
+    # Base USD (no libero MDL material overlay) — same baked wrist geometry,
+    # default URDF-imported visuals (no _xml_overlay.usda).
+    usd_path: /home/hez2/code/Grounded_MCTS_IsaacLab/assets/franka_gripper/usd/franka_gripper_libero_visual_wrist_palmback_5cm_tilt15.usd
+
+# Wrist mount: pin to the ablate_neg6p5cm_p8 canonical (extra
+# (0.015 m back, 8° pitch) on top of the URDF -5cm/15° baseline
+# -> total -6.5 cm / 23°). Single-element wrist_camera_aug_combos
+# overrides the BaseEnvCfg 6-combo dataclass default, so the bake
+# path at base_env.py:423-437 runs once with this combo at env
+# construction. No session-level DR.
+enable_wrist_camera_pose_augmentation: true
+wrist_camera_aug_combos:
+  - [0.015, 8.0]
+
+# Gripper opening init: canonical-only (= max opening, ~0.04 for Panda)
+# every reset. No DR — matches the real Franka's default "fingers fully
+# open" startup pose for sim-to-real eval.
+enable_gripper_init_randomization: false

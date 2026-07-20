@@ -1,0 +1,639 @@
+##
+## Copyright (c) 2023 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+##
+## NVIDIA CORPORATION, its affiliates and licensors retain all intellectual
+## property and proprietary rights in and to this material, related
+## documentation and any modifications thereto. Any use, reproduction,
+## disclosure or distribution of this material and related documentation
+## without an express license agreement from NVIDIA CORPORATION or
+## its affiliates is strictly prohibited.
+##
+
+robot_cfg:
+  kinematics:
+    use_usd_kinematics: False
+    usd_path: "/dev/null"
+    usd_robot_root: "/robot"
+    isaac_usd_path: ""
+    usd_flip_joints: {}
+    usd_flip_joint_limits: []
+
+    urdf_path: "robots/franka_shadow.urdf"
+    asset_root_path: ""
+
+    base_link: "panda_link0"
+    ee_link: "wrist"
+    link_names: null
+    lock_joints: null
+    extra_links: null
+
+    collision_link_names: [
+        "panda_link0",
+        "panda_link1",
+        "panda_link2",
+        "panda_link3",
+        "panda_link4",
+        "panda_link5",
+        "panda_link6",
+        "panda_link7",
+        "forearm",
+        "wrist",
+        "palm",
+        "ffknuckle",
+        "ffproximal",
+        "ffmiddle",
+        "ffdistal",
+        "lfmetacarpal",
+        "lfknuckle",
+        "lfproximal",
+        "lfmiddle",
+        "lfdistal",
+        "mfknuckle",
+        "mfproximal",
+        "mfmiddle",
+        "mfdistal",
+        "rfknuckle",
+        "rfproximal",
+        "rfmiddle",
+        "rfdistal",
+        "thbase",
+        "thproximal",
+        "thhub",
+        "thmiddle",
+        "thdistal",
+      ] # List[str]
+    collision_spheres:
+      panda_link0:
+        - "center": [-0.08, 0.0, 0.05]
+          "radius": 0.06
+        - "center": [-0.0, 0.0, 0.05]
+          "radius": 0.08
+      panda_link1:
+        - "center": [0.0, -0.08, 0.0]
+          "radius": 0.06
+        - "center": [0.0, -0.03, 0.0]
+          "radius": 0.06
+        - "center": [0.0, 0.0, -0.12]
+          "radius": 0.06
+        - "center": [0.0, 0.0, -0.17]
+          "radius": 0.06
+      panda_link2:
+        - "center": [0.0, 0.0, 0.03]
+          "radius": 0.06
+        - "center": [0.0, 0.0, 0.08]
+          "radius": 0.06
+        - "center": [0.0, -0.12, 0.0]
+          "radius": 0.06
+        - "center": [0.0, -0.17, 0.0]
+          "radius": 0.06
+      panda_link3:
+        - "center": [0.0, 0.0, -0.06]
+          "radius": 0.05
+        - "center": [0.0, 0.0, -0.1]
+          "radius": 0.06
+        - "center": [0.08, 0.06, 0.0]
+          "radius": 0.055
+        - "center": [0.08, 0.02, 0.0]
+          "radius": 0.055
+      panda_link4:
+        - "center": [0.0, 0.0, 0.02]
+          "radius": 0.055
+        - "center": [0.0, 0.0, 0.06]
+          "radius": 0.055
+        - "center": [-0.08, 0.095, 0.0]
+          "radius": 0.06
+        - "center": [-0.08, 0.06, 0.0]
+          "radius": 0.055
+      panda_link5:
+        - "center": [0.0, 0.055, 0.0]
+          "radius": 0.05
+        - "center": [0.0, 0.085, 0.0]
+          "radius": 0.055
+        - "center": [0.0, 0.000, -0.22]
+          "radius": 0.05
+        - "center": [0.0, 0.05, -0.18]
+          "radius": 0.045
+        - "center": [0.015, 0.08, -0.14]
+          "radius": 0.03
+        - "center": [0.015, 0.085, -0.11]
+          "radius": 0.03
+        - "center": [0.015, 0.09, -0.08]
+          "radius": 0.03
+        - "center": [0.015, 0.095, -0.05]
+          "radius": 0.03
+        - "center": [-0.015, 0.08, -0.14]
+          "radius": 0.03
+        - "center": [-0.015, 0.085, -0.11]
+          "radius": 0.03
+        - "center": [-0.015, 0.09, -0.08]
+          "radius": 0.03
+        - "center": [-0.015, 0.095, -0.05]
+          "radius": 0.03
+      panda_link6:
+        - "center": [0.0, 0.0, 0.0]
+          "radius": 0.05
+        - "center": [0.08, 0.035, 0.0]
+          "radius": 0.05
+        - "center": [0.08, -0.01, 0.0]
+          "radius": 0.05
+      panda_link7:
+        - "center": [0.0, 0.0, 0.07]
+          "radius": 0.05
+        - "center": [0.02, 0.04, 0.08]
+          "radius": 0.025
+        - "center": [0.04, 0.02, 0.08]
+          "radius": 0.025
+        - "center": [0.04, 0.06, 0.085]
+          "radius": 0.02
+        - "center": [0.06, 0.04, 0.085]
+          "radius": 0.02
+      # Note: Following is mine
+      forearm:
+        - "center": [0.0, 0.0, 0.06]
+          "radius": 0.06
+        - "center": [0.0, 0.0, 0.12]
+          "radius": 0.06
+      wrist:
+        - "center": [0.0, 0.0, 0.0]
+          "radius": 0.01
+      palm:
+        - "center": [-0.01, 0.0, 0.01]
+          "radius": 0.01
+        - "center": [-0.01, 0.0, 0.06]
+          "radius": 0.01
+        - "center": [0.02, 0.0, 0.01]
+          "radius": 0.01
+        - "center": [0.02, 0.0, 0.06]
+          "radius": 0.01
+      ffknuckle:
+        - "center": [0.0, 0.0, 0.0]
+          "radius": 0.0025
+      ffproximal:
+        - "center": [0.0, 0.0, 0.009]
+          "radius": 0.004
+        - "center": [0.0, 0.0, 0.041]
+          "radius": 0.004
+      ffmiddle:
+        - "center": [0.0, 0.0, 0.009]
+          "radius": 0.004
+        - "center": [0.0, 0.0, 0.016]
+          "radius": 0.004
+      ffdistal:
+        - "center": [0, 0.002, 0.0025]
+          "radius": 0.001
+      lfmetacarpal:
+        - "center": [0.0, 0.0, 0.029]
+          "radius": 0.004
+        - "center": [0.0, 0.0, 0.051]
+          "radius": 0.004
+      lfknuckle:
+        - "center": [0.0, 0.0, 0.0]
+          "radius": 0.0025
+      lfproximal:
+        - "center": [0.0, 0.0, 0.009]
+          "radius": 0.004
+        - "center": [0.0, 0.0, 0.041]
+          "radius": 0.004
+      lfmiddle:
+        - "center": [0.0, 0.0, 0.009]
+          "radius": 0.004
+        - "center": [0.0, 0.0, 0.016]
+          "radius": 0.004
+      lfdistal:
+        - "center": [0, 0.002, 0.0025]
+          "radius": 0.001
+      mfknuckle:
+        - "center": [0.0, 0.0, 0.0]
+          "radius": 0.0025
+      mfproximal:
+        - "center": [0.0, 0.0, 0.009]
+          "radius": 0.004
+        - "center": [0.0, 0.0, 0.041]
+          "radius": 0.004
+      mfmiddle:
+        - "center": [0.0, 0.0, 0.009]
+          "radius": 0.004
+        - "center": [0.0, 0.0, 0.016]
+          "radius": 0.004
+      mfdistal:
+        - "center": [0, 0.002, 0.0025]
+          "radius": 0.001
+      rfknuckle:
+        - "center": [0.0, 0.0, 0.0]
+          "radius": 0.0025
+      rfproximal:
+        - "center": [0.0, 0.0, 0.009]
+          "radius": 0.004
+        - "center": [0.0, 0.0, 0.041]
+          "radius": 0.004
+      rfmiddle:
+        - "center": [0.0, 0.0, 0.009]
+          "radius": 0.004
+        - "center": [0.0, 0.0, 0.016]
+          "radius": 0.004
+      rfdistal:
+        - "center": [0, 0.002, 0.0025]
+          "radius": 0.001
+      thbase:
+        - "center": [0.0, 0.0, 0.0]
+          "radius": 0.0005
+      thproximal:
+        - "center": [0.0, 0.0, 0.013]
+          "radius": 0.004
+        - "center": [0.0, 0.0, 0.025]
+          "radius": 0.004
+      thhub:
+        - "center": [0.0, 0.0, 0.0]
+          "radius": 0.0005
+      thmiddle:
+        - "center": [0.0, 0.0, 0.0125]
+          "radius": 0.004
+        - "center": [0.0, 0.0, 0.0195]
+          "radius": 0.004
+      thdistal:
+        - "center": [0, 0.002, 0.0025]
+          "radius": 0.001
+    collision_sphere_buffer: 0.0 # float or Dict[str, float]
+    extra_collision_spheres: {}
+    self_collision_ignore: {
+        "panda_link0": ["panda_link1", "panda_link2"],
+        "panda_link1": ["panda_link2", "panda_link3", "panda_link4"],
+        "panda_link2": ["panda_link3", "panda_link4"],
+        "panda_link3": ["panda_link4", "panda_link6"],
+        "panda_link4": ["panda_link5", "panda_link6", "panda_link7"],
+        "panda_link5": ["panda_link6", "panda_link7"],
+        "panda_link6": ["panda_link7", "forearm"],
+        "panda_link7": ["panda_hand", "attached_object", "forearm"],
+        "forearm":
+          [
+            "wrist",
+            "palm",
+            "ffknuckle",
+            "ffproximal",
+            "ffmiddle",
+            "ffdistal",
+            "lfmetacarpal",
+            "lfknuckle",
+            "lfproximal",
+            "lfmiddle",
+            "lfdistal",
+            "mfknuckle",
+            "mfproximal",
+            "mfmiddle",
+            "mfdistal",
+            "rfknuckle",
+            "rfproximal",
+            "rfmiddle",
+            "rfdistal",
+            "thbase",
+            "thproximal",
+            "thhub",
+            "thmiddle",
+            "thdistal",
+          ],
+        "wrist":
+          [
+            "palm",
+            "ffknuckle",
+            "ffproximal",
+            "ffmiddle",
+            "ffdistal",
+            "lfmetacarpal",
+            "lfknuckle",
+            "lfproximal",
+            "lfmiddle",
+            "lfdistal",
+            "mfknuckle",
+            "mfproximal",
+            "mfmiddle",
+            "mfdistal",
+            "rfknuckle",
+            "rfproximal",
+            "rfmiddle",
+            "rfdistal",
+            "thbase",
+            "thproximal",
+            "thhub",
+            "thmiddle",
+            "thdistal",
+          ],
+        "palm":
+          [
+            "ffknuckle",
+            "ffproximal",
+            "ffmiddle",
+            "ffdistal",
+            "lfmetacarpal",
+            "lfknuckle",
+            "lfproximal",
+            "lfmiddle",
+            "lfdistal",
+            "mfknuckle",
+            "mfproximal",
+            "mfmiddle",
+            "mfdistal",
+            "rfknuckle",
+            "rfproximal",
+            "rfmiddle",
+            "rfdistal",
+            "thbase",
+            "thproximal",
+            "thhub",
+            "thmiddle",
+            "thdistal",
+          ],
+        "ffknuckle":
+          [
+            "ffproximal",
+            "ffmiddle",
+            "ffdistal",
+            "lfmetacarpal",
+            "lfknuckle",
+            "lfproximal",
+            "lfmiddle",
+            "lfdistal",
+            "mfknuckle",
+            "mfproximal",
+            "mfmiddle",
+            "mfdistal",
+            "rfknuckle",
+            "rfproximal",
+            "rfmiddle",
+            "rfdistal",
+            "thbase",
+            "thproximal",
+            "thhub",
+            "thmiddle",
+            "thdistal",
+          ],
+        "ffproximal":
+          [
+            "ffmiddle",
+            "ffdistal",
+            "lfmetacarpal",
+            "lfknuckle",
+            "lfproximal",
+            "lfmiddle",
+            "lfdistal",
+            "mfknuckle",
+            "mfproximal",
+            "mfmiddle",
+            "mfdistal",
+            "rfknuckle",
+            "rfproximal",
+            "rfmiddle",
+            "rfdistal",
+            "thbase",
+            "thproximal",
+            "thhub",
+            "thmiddle",
+            "thdistal",
+          ],
+        "ffmiddle":
+          [
+            "ffdistal",
+            "lfmetacarpal",
+            "lfknuckle",
+            "lfproximal",
+            "lfmiddle",
+            "lfdistal",
+            "mfknuckle",
+            "mfproximal",
+            "mfmiddle",
+            "mfdistal",
+            "rfknuckle",
+            "rfproximal",
+            "rfmiddle",
+            "rfdistal",
+            "thbase",
+            "thproximal",
+            "thhub",
+            "thmiddle",
+            "thdistal",
+          ],
+        "ffdistal":
+          [
+            "lfmetacarpal",
+            "lfknuckle",
+            "lfproximal",
+            "lfmiddle",
+            "lfdistal",
+            "mfknuckle",
+            "mfproximal",
+            "mfmiddle",
+            "mfdistal",
+            "rfknuckle",
+            "rfproximal",
+            "rfmiddle",
+            "rfdistal",
+            "thbase",
+            "thproximal",
+            "thhub",
+            "thmiddle",
+            "thdistal",
+          ],
+        "lfmetacarpal":
+          [
+            "lfknuckle",
+            "lfproximal",
+            "lfmiddle",
+            "lfdistal",
+            "mfknuckle",
+            "mfproximal",
+            "mfmiddle",
+            "mfdistal",
+            "rfknuckle",
+            "rfproximal",
+            "rfmiddle",
+            "rfdistal",
+            "thbase",
+            "thproximal",
+            "thhub",
+            "thmiddle",
+            "thdistal",
+          ],
+        "lfknuckle":
+          [
+            "lfproximal",
+            "lfmiddle",
+            "lfdistal",
+            "mfknuckle",
+            "mfproximal",
+            "mfmiddle",
+            "mfdistal",
+            "rfknuckle",
+            "rfproximal",
+            "rfmiddle",
+            "rfdistal",
+            "thbase",
+            "thproximal",
+            "thhub",
+            "thmiddle",
+            "thdistal",
+          ],
+        "lfproximal":
+          [
+            "lfmiddle",
+            "lfdistal",
+            "mfknuckle",
+            "mfproximal",
+            "mfmiddle",
+            "mfdistal",
+            "rfknuckle",
+            "rfproximal",
+            "rfmiddle",
+            "rfdistal",
+            "thbase",
+            "thproximal",
+            "thhub",
+            "thmiddle",
+            "thdistal",
+          ],
+        "lfmiddle":
+          [
+            "lfdistal",
+            "mfknuckle",
+            "mfproximal",
+            "mfmiddle",
+            "mfdistal",
+            "rfknuckle",
+            "rfproximal",
+            "rfmiddle",
+            "rfdistal",
+            "thbase",
+            "thproximal",
+            "thhub",
+            "thmiddle",
+            "thdistal",
+          ],
+        "lfdistal":
+          [
+            "mfknuckle",
+            "mfproximal",
+            "mfmiddle",
+            "mfdistal",
+            "rfknuckle",
+            "rfproximal",
+            "rfmiddle",
+            "rfdistal",
+            "thbase",
+            "thproximal",
+            "thhub",
+            "thmiddle",
+            "thdistal",
+          ],
+        "mfknuckle":
+          [
+            "mfproximal",
+            "mfmiddle",
+            "mfdistal",
+            "rfknuckle",
+            "rfproximal",
+            "rfmiddle",
+            "rfdistal",
+            "thbase",
+            "thproximal",
+            "thhub",
+            "thmiddle",
+            "thdistal",
+          ],
+        "mfproximal":
+          [
+            "mfmiddle",
+            "mfdistal",
+            "rfknuckle",
+            "rfproximal",
+            "rfmiddle",
+            "rfdistal",
+            "thbase",
+            "thproximal",
+            "thhub",
+            "thmiddle",
+            "thdistal",
+          ],
+        "mfmiddle":
+          [
+            "mfdistal",
+            "rfknuckle",
+            "rfproximal",
+            "rfmiddle",
+            "rfdistal",
+            "thbase",
+            "thproximal",
+            "thhub",
+            "thmiddle",
+            "thdistal",
+          ],
+        "mfdistal":
+          [
+            "rfknuckle",
+            "rfproximal",
+            "rfmiddle",
+            "rfdistal",
+            "thbase",
+            "thproximal",
+            "thhub",
+            "thmiddle",
+            "thdistal",
+          ],
+        "rfknuckle":
+          [
+            "rfproximal",
+            "rfmiddle",
+            "rfdistal",
+            "thbase",
+            "thproximal",
+            "thhub",
+            "thmiddle",
+            "thdistal",
+          ],
+        "rfproximal":
+          [
+            "rfmiddle",
+            "rfdistal",
+            "thbase",
+            "thproximal",
+            "thhub",
+            "thmiddle",
+            "thdistal",
+          ],
+        "rfmiddle":
+          ["rfdistal", "thbase", "thproximal", "thhub", "thmiddle", "thdistal"],
+        "rfdistal": ["thbase", "thproximal", "thhub", "thmiddle", "thdistal"],
+        "thbase": ["thproximal", "thhub", "thmiddle", "thdistal"],
+        "thproximal": ["thhub", "thmiddle", "thdistal"],
+        "thhub": ["thmiddle", "thdistal"],
+        "thmiddle": ["thdistal"],
+      } # Dict[str, List[str]]
+    self_collision_buffer: {
+        "panda_link0": 0.1,
+        "panda_link1": 0.05,
+        "panda_link2": 0.0,
+        "panda_link3": 0.0,
+        "panda_link4": 0.0,
+        "panda_link5": 0.0,
+        "panda_link6": 0.0,
+        "panda_link7": 0.0,
+      } # Dict[str, float]
+
+    use_global_cumul: True
+    mesh_link_names: null # List[str]
+    external_asset_path: null # Use this to add path for externally located assets/robot folder.
+
+    cspace:
+      joint_names: [
+          "panda_joint1",
+          "panda_joint2",
+          "panda_joint3",
+          "panda_joint4",
+          "panda_joint5",
+          "panda_joint6",
+          "panda_joint7",
+          "panda_hand_joint",
+          "WRJ2",
+        ] # List[str]
+      retract_config: [0.0, -1.3, 0.0, -2.5, 0.0, 1.5, 0.0, 0.0, 0.0] # List[float]
+      null_space_weight: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0] # List[str]
+      cspace_distance_weight: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0] # List[str]
+      max_jerk: 500.0
+      max_acceleration: 15.0

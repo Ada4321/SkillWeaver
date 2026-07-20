@@ -1,0 +1,45 @@
+#usda 1.0
+(
+    defaultPrim = "panda"
+    subLayers = [
+        @./franka_gripper_libero_visual_xml_overlay.usda@
+    ]
+)
+
+over "panda"
+{
+    over "Looks"
+    {
+        def Material "ProbePink"
+        {
+            token outputs:surface.connect = </panda/Looks/ProbePink/PreviewSurface.outputs:surface>
+            def Shader "PreviewSurface"
+            {
+                uniform token info:id = "UsdPreviewSurface"
+                color3f inputs:diffuseColor = (1.000000, 0.000000, 0.700000)
+                int inputs:useSpecularWorkflow = 1
+                color3f inputs:specularColor = (1.000000, 1.000000, 1.000000)
+                float inputs:roughness = 0.020000
+                float inputs:metallic = 0.000000
+                float inputs:clearcoat = 1.000000
+                float inputs:clearcoatRoughness = 0.000000
+                token outputs:surface
+            }
+        }
+    }
+
+    # Probe a prominent arm mesh; this should be visually obvious.
+    over "panda_link0"
+    {
+        over "visuals"
+        {
+            over "link0_vis_0"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/ProbePink>
+                }
+            }
+        }
+    }
+}

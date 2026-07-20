@@ -1,0 +1,101 @@
+robot_cfg:
+  kinematics:
+    use_usd_kinematics: false          # we stay with URDF-based kinematics
+    isaac_usd_path: ""                 # (leave empty unless you export to USD)
+    usd_path: ""
+    usd_robot_root: ""
+    usd_flip_joints: []                # not used
+    usd_flip_joint_limits: []
+
+    urdf_path: "/home/hez2/code/Grounded_MCTS_IsaacLab/assets/widowx_gripper/robots/wx250s.urdf"
+    asset_root_path: ""
+
+    base_link:  "base_link"
+    ee_link:    "gripper_link"
+
+    collision_link_names:
+      [
+        "base_link",
+        "shoulder_link",
+        "upper_arm_link",
+        "upper_forearm_link",
+        "lower_forearm_link",
+        "wrist_link",
+        "gripper_link",
+        "left_finger_link",
+        "right_finger_link",
+        "attached_object",
+      ]
+
+    collision_spheres: "/home/hez2/code/Grounded_MCTS_IsaacLab/assets/widowx_gripper/curobo/collision_spheres.yml"   # create with mesh‑to‑sphere tool
+    collision_sphere_buffer: 0.00
+    extra_collision_spheres: {"attached_object": 4}          # e.g. suction cup, gripper pads …
+
+    use_global_cumul: true               # accumulate transforms for speed
+
+    # ignore contact between neighbouring links to avoid false positives
+    self_collision_ignore:
+      {
+        "base_link": ["shoulder_link", "upper_arm_link", "upper_forearm_link", "lower_forearm_link", "wrist_link", "gripper_link", "left_finger_link", "right_finger_link", "attached_object"],
+        "shoulder_link": ["base_link", "upper_arm_link", "upper_forearm_link", "lower_forearm_link", "wrist_link", "gripper_link", "left_finger_link", "right_finger_link", "attached_object"],
+        "upper_arm_link": ["base_link", "shoulder_link", "upper_forearm_link", "lower_forearm_link", "wrist_link", "gripper_link", "left_finger_link", "right_finger_link", "attached_object"],
+        "upper_forearm_link": ["base_link", "shoulder_link", "upper_arm_link", "lower_forearm_link", "wrist_link", "gripper_link", "left_finger_link", "right_finger_link", "attached_object"],
+        "lower_forearm_link": ["base_link", "shoulder_link", "upper_arm_link", "upper_forearm_link", "wrist_link", "gripper_link", "left_finger_link", "right_finger_link", "attached_object"],
+        "wrist_link": ["base_link", "shoulder_link", "upper_arm_link", "upper_forearm_link", "lower_forearm_link", "gripper_link", "left_finger_link", "right_finger_link", "attached_object"],
+        "gripper_link": ["base_link", "shoulder_link", "upper_arm_link", "upper_forearm_link", "lower_forearm_link", "wrist_link", "left_finger_link", "right_finger_link", "attached_object"],
+        "left_finger_link": ["base_link", "shoulder_link", "upper_arm_link", "upper_forearm_link", "lower_forearm_link", "wrist_link", "gripper_link", "right_finger_link", "attached_object"],
+        "right_finger_link": ["base_link", "shoulder_link", "upper_arm_link", "upper_forearm_link", "lower_forearm_link", "wrist_link", "gripper_link", "left_finger_link", "attached_object"],
+      }
+
+    # optional per‑link inflation radius (m)
+    self_collision_buffer:
+      {
+        "base_link": 0.01,
+        "shoulder_link": 0.01,
+        "upper_arm_link": 0.01,
+        "upper_forearm_link": 0.01,
+        "lower_forearm_link": 0.01,
+        "wrist_link": 0.01,
+        "gripper_link": 0.005,
+        "ee_arm_link": 0.005,
+        "left_finger_link": 0.005,
+        "right_finger_link": 0.005,
+        "attached_object": 0.0,   # e.g. suction cup, gripper pads …
+      }
+
+    # links whose visual meshes you want for rendering / debug
+    mesh_link_names:
+      [
+        "base_link",
+        "shoulder_link",
+        "upper_arm_link",
+        "upper_forearm_link",
+        "lower_forearm_link",
+        "wrist_link",
+        "gripper_link",
+        "left_finger_link",
+        "right_finger_link",
+      ]
+
+    lock_joints: {left_finger: 0.05}
+
+    extra_links: {"attached_object":{"parent_link_name": "gripper_link" ,
+    "link_name": "attached_object", "fixed_transform": [0,0,0,1,0,0,0], "joint_type":"FIXED",
+    "joint_name": "attach_joint" }}
+
+    cspace:
+      joint_names:
+        [
+          "waist", "shoulder", "elbow", "forearm_roll", "wrist_angle", "wrist_rotate", "left_finger", "right_finger"
+        ]
+
+      retract_config:
+        [
+          0.0, -0.8, 1.3, 0.0, 0.7, 0.0, 0, 0
+        ]
+
+      null_space_weight:        [3.0, 1.5, 1.5, 1.0, 1.0, 1.0, 0, 0]     # same length as joint_names
+      cspace_distance_weight:   [1, 1, 1, 1, 1, 1, 1, 1]
+
+      max_acceleration: 15.0    # rad /s² (UR10 ≈ 12 rad/s² nominal; 15 leaves some margin)
+      max_jerk:         500.0   # rad /s³  (same as Panda example; tune if needed)

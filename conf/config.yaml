@@ -1,0 +1,16 @@
+defaults:
+  - run: default
+  - skills: default
+  - simulator: isaaclab
+  - env: default
+  - mcts: default
+  - memory: default
+  - policy_infer: default
+  - _self_
+
+hydra:
+  job:
+    chdir: false
+  run:
+    dir: .
+  output_subdir: null

@@ -1,0 +1,6 @@
+# Container categories with canonical +z pointing from base toward opening.
+# Listed objects get a "pose: upright|lying" field injected into VLM prompts
+# whenever upright-status injection is enabled.
+mug
+cup
+utensil_holder

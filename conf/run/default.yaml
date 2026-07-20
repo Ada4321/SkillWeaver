@@ -1,0 +1,27 @@
+seed: 42
+use_timestamp_seed: false
+save_rollouts_dir: outputs/rollouts
+save_tag: null
+save_node_videos: true
+append_timestamp: false
+batch:
+  enabled: false
+  scene_files_dir: null
+  scene_file_glob: "*.json"
+  task_types: []
+  reuse_kit: false
+eval:
+  pass_k: 1
+  max_exp_per_task: 3
+  max_task_per_scene: null
+  # Task-group subsampling strategy when max_task_per_scene limits candidates:
+  # - random: timestamp-seeded random sample (legacy behavior)
+  # - balanced_scene_mod: deterministic scene-id modulo mapping (recommended for max_task_per_scene=1)
+  task_subsample_strategy: random
+  # Optional integer offset for balanced_scene_mod.
+  task_subsample_seed: 0
+  success_exp_to_advance: 1
+  only_search_unsuccessful_tasks: false
+runner:
+  mode: isaaclab_eval
+  num_processes: 1

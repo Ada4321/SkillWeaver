@@ -1,0 +1,92 @@
+# simpler / BridgeData WidowX SINK task (put-eggplant-in-basket): FIXED bridge
+# sink head camera. Inherits conf/env/default.yaml; only fields below differ.
+#
+# Calibrated from SimplerEnv WidowXSinkCameraSetupConfig 3rd_view_camera (C920),
+# mounted on base_link at p=[-0.003,-0.21,0.39], q=[-0.907313,0.0782,-0.36434,
+# -0.194741] (wxyz). Optical axis [0.6587,0.2964,-0.6916]. Base at world origin
+# in IsaacLab, so base-frame == world; optical ray ∩ reference plane (base z=0)
+# at (0.3684,-0.0429). Spherical aug params below reproduce the pose exactly
+# (forward-verified against scripts/sample_layout_tablez_camposes.py).
+#
+# NOTE: the sink scene is NOT a flat table (eggplant sits in a basin; bridge sink
+# setup uses a different robot base height, 0.85 vs 0.87, + a fixed sink actor).
+# So lookat_z is PINNED (fixed 0.0) rather than null -> the camera holds the exact
+# bridge pose regardless of any "table surface" notion. Revisit the reference
+# plane once the sink scene is built (Part 0/5).
+#
+# Intrinsics identical to the table cam (same C920): focal=24, h_aperture=24.6316.
+
+defaults:
+  - default
+  - _self_
+
+# --- Head (front) camera = fixed bridge sink 3rd_view_camera ---
+front_camera_aug_center: [0.3684, -0.0429, 0.0]  # look-at xy (= optical ray ∩ base z=0); z from lookat_z
+front_camera_aug_radius_ranges: "0.5639:0.5639"
+front_camera_aug_radius_mode: 0.5639
+front_camera_aug_azimuth_ranges_deg: "-155.772:-155.772"
+front_camera_aug_azimuth_mode_deg: -155.772
+front_camera_aug_elevation_ranges_deg: "43.757:43.757"
+front_camera_aug_elevation_mode_deg: 43.757
+front_camera_aug_lookat_z_ranges: "0.0:0.0"      # PINNED (sink is not a flat table)
+front_camera_aug_lookat_z_mode: 0.0
+
+# No table in the sink scene, so the camposes pre-sampler's no-table branch
+# anchors the look-at xy on table_init_pos — set it to the calibrated look-at
+# (matches front_camera_aug_center above; z is inert, no table is spawned).
+# Runtime is unaffected: with lookat_z_ranges pinned, base_env already takes
+# the look-at xy from front_camera_aug_center.
+table_init_pos: [0.3684, -0.0429, -0.01]
+
+# --- Overlay-mode scene: objects at their TRUE base-frame poses ---
+# Objects decoupled from any table anchor (true base xy, like simpler_table).
+object_xy_anchor: [0.0, 0.0]
+# No-table support_z comes from the table_z bank (forced_floor_z); pin the range
+# to 0 so the pre-sampler emits an all-zero bank and object z = base-frame z
+# verbatim (the scene json carries absolute heights: eggplant in basin, fixtures
+# at their sink heights). Ground safety-net follows a few mm below z=0.
+# NB: the no-table upper bound is max_table_surface_height (default.yaml 0.18),
+# NOT table_z_range[1] — pin it too or the bank samples 0..0.18.
+table_z_range: [0.0, 0.0]
+max_table_surface_height: 0.0
+
+# Opt in to the scene json `background_image` overlay composite (default off;
+# the sink scene renders against the bridge sink photo).
+enable_background_overlay: true
+
+# Static background image composite (scene json `background_image`) requires
+# stable lighting. NB: `enable_dome_light_augmentation: false` would NOT pin the
+# intensity — _randomize_dome_light early-returns and the dome stays at its
+# creation default (2000). Deterministic control = keep augmentation ON but pin
+# every channel: prob-1 intensity with a zero-width range, zero-width yaw, and
+# zero texture/color probability. No walls/floor in this scene, so the dome hits
+# the meshes unoccluded — same intensity reads much brighter than walled scenes.
+enable_dome_light_augmentation: true
+dome_light_intensity_range: [250, 250]
+dome_light_intensity_aug_prob: 1.0
+dome_light_yaw_range: [0.0, 0.0]
+dome_light_texture_aug_prob: 0.0
+dome_light_color_aug_prob: 0.0
+
+# SimplerEnv's sink task uses a different init arm pose than the table tasks
+# (all 6 arm joints differ; measured live from the benchmark). Applied in
+# make_env via WIDOWX_SINK_INIT_QPOS (simulators/base_env_cfg.py).
+robot_init_qpos_preset: widowx_sink
+
+# WidowX init-qpos bank (6-dof rows; overrides default.yaml's franka 7-dof
+# banks, which would fail the arm_dof shape check). Sampled around the
+# SimplerEnv sink pose by SceneGen robot_augmentation/sample_widowx.sh.
+init_arm_pos_files:
+  - "/home/hez2/code/Grounded_MCTS_IsaacLab/data/init_arm_qpos_widowx_sink.npz"
+
+# WidowX (bridge) has no wrist camera; the wx250s USD has no wrist_camera_link
+# to anchor one, so the wrist TiledCamera must not be spawned.
+enable_wrist_camera: false
+
+enable_front_camera_fov_augmentation: false
+front_camera:
+  width: 640                                       # 4:3 render -> vfov 42.1 deg
+  height: 480
+  spawn:
+    focal_length: 24.0
+    horizontal_aperture: 24.6316                   # fx=fy=623.588, hfov 54.3 deg

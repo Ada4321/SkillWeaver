@@ -1,0 +1,11 @@
+# Elongated objects: their longest canonical axis (per `axis_length_*`) is checked
+# against world +z to decide "upright" (long axis ~vertical) vs "lying"
+# (long axis ~horizontal). Direction-agnostic (uses |cos|), since either end
+# pointing up still counts as upright for these objects.
+spoon
+fork
+butter_knife
+toothbrush
+toothpaste_tube
+bottle
+mark_pen

@@ -1,0 +1,17 @@
+beer_bottle
+energy_drink_can
+hot_sauce_bottle
+juice_carton
+ketchup_bottle
+milk_carton
+mustard_bottle
+oil_bottle
+orange_juice_carton
+salad_dressing_bottle
+soda_can
+syrup_bottle
+vinegar_bottle
+water_bottle
+wine_bottle
+wine_glass
+bottle

@@ -1,0 +1,38 @@
+# libero_object preset: FIXED LIBERO agentview head camera (no pose/FoV aug).
+# Inherits conf/env/default.yaml; only the fields below differ.
+#
+# libero_object runs the LIBERO *floor* arena (objects on the ground, no table).
+# Calibrated from the COMPILED LIBERO floor arena agentview (NOT the scene XML):
+#   - agentview world pose (0.8966, 0, 0.65), optical pitch 31.9 deg, fovy 45.
+#   - robot0_base at (-0.60, 0, 0.0) => agentview REL robot base (1.497, 0, 0.650).
+#   - Shallower pitch than tabletop (31.9 vs 38.9) and camera farther back, so the
+#     look-at on the work surface is rel-rb (0.474, 0, 0.013) with radius 1.205.
+#   - This repo's libero layouts are robot-base-relative (object world == LIBERO
+#     rel-rb; robot base = world origin), so the camera goes at the same relative
+#     pose: spherical about the work-surface look-at (0.474, 0) with r/el/az below.
+#     lookat_z is locked to the scene surface (null), so the camera floats with
+#     whatever surface height the layout uses (the IsaacLab object scenes still
+#     place objects on a thin table rather than the bare floor).
+# Data collection is 256x256; FoV is resolution-independent so 45 deg holds at 256.
+
+defaults:
+  - default
+  - _self_
+
+# --- Head (front) camera = fixed LIBERO floor-arena agentview ---
+front_camera_aug_center: [0.474, 0.0, 0.05]    # look-at xy (z comes from lookat_z; center[2] is ignored by the sampler)
+front_camera_aug_radius_ranges: "1.205:1.205"
+front_camera_aug_radius_mode: 1.205
+front_camera_aug_azimuth_ranges_deg: "0.0:0.0"
+front_camera_aug_azimuth_mode_deg: 0.0
+front_camera_aug_elevation_ranges_deg: "31.9:31.9"
+front_camera_aug_elevation_mode_deg: 31.9
+front_camera_aug_lookat_z_ranges: null         # lock look-at to the work surface (where objects sit)
+front_camera_aug_lookat_z_mode: null
+
+# Fixed FoV = LIBERO agentview fovy 45 deg (no augmentation -> spawn aperture used verbatim).
+enable_front_camera_fov_augmentation: false
+front_camera:
+  spawn:
+    focal_length: 24.0
+    horizontal_aperture: 19.882                 # 2*24*tan(22.5 deg) -> 45 deg square FoV

@@ -1,0 +1,68 @@
+# simpler / BridgeData WidowX TABLE tasks (spoon-on-towel, carrot-on-plate,
+# stack-cube). Aligned to the Real2Sim render pipeline (build_env_full) which was
+# tuned + verified against the SimplerEnv bridge head-cam. Inherits
+# conf/env/default.yaml; only the fields below differ.
+#
+# Camera: SimplerEnv WidowXBridgeDatasetCameraSetup 3rd_view_camera (Logitech C920)
+# mounted on base_link at p=[0,-0.16,0.336], q=[0.909182,-0.0819809,0.347277,
+# 0.214629] -> optical axis hits the table top (base z=0) at (0.336,0.008). Robot
+# is at the world origin in IsaacLab (base==world). The spherical mode below
+# reproduces cam pos (0,-0.16,0.336) exactly; ranges add a slight per-episode
+# perturbation around that mode (triangular, mode=peak).
+#
+# Intrinsics: C920 fx=fy=623.588, cx=319.501, cy=239.545 @ 640x480 (image-centered
+# -> no aperture offset). focal=24 -> horizontal_aperture=24*640/623.588=24.6316
+# (hfov 54.3 deg); 4:3 render -> vfov 42.1 deg matches bridge. (unchanged)
+#
+# Table / floor / walls / object placement aligned to the render pipeline:
+#   table surface z=0 (base), table xy=(0.335,0.035), size 0.37x0.59 from scene;
+#   objects DECOUPLED from table (object_xy_anchor=0 -> true base xy);
+#   floor ~-2.0, walls front_x=2.2 / left_y=1.5 / scale 1.5 (height follows floor).
+
+defaults:
+  - default
+  - _self_
+
+# --- Head (front) camera: mode = bridge 3rd_view_camera, slight perturbation ---
+front_camera_aug_center: [0.336, 0.008, 0.0]     # look-at (optical ray ∩ table top); z from lookat_z
+front_camera_aug_radius_ranges: "0.48:0.53"
+front_camera_aug_radius_mode: 0.504
+front_camera_aug_azimuth_ranges_deg: "-158.435:-148.435"   # mode +/- 5 deg
+front_camera_aug_azimuth_mode_deg: -153.435
+front_camera_aug_elevation_ranges_deg: "36.81:46.81"       # mode +/- 5 deg
+front_camera_aug_elevation_mode_deg: 41.81
+front_camera_aug_lookat_z_ranges: null           # lock look-at to table surface (z=0)
+front_camera_aug_lookat_z_mode: null
+
+# Fixed FoV = bridge C920; 4:3 render so vertical FoV is correct (no aug).
+enable_front_camera_fov_augmentation: false
+front_camera:
+  width: 640                                       # 4:3 render -> vfov 42.1 deg (matches bridge)
+  height: 480
+  spawn:
+    focal_length: 24.0
+    horizontal_aperture: 24.6316                   # 24*640/623.588 -> fx=fy=623.588, hfov 54.3 deg
+
+# --- Table: surface z=0 (slight height perturbation), xy = render TABLE_XY ---
+# table center z = -table_height/2 = -0.01 (scene table is 0.02 thick) -> surface 0.
+table_init_pos: [0.335, 0.035, -0.01]
+table_z_range: [-0.025, 0.005]                     # center -0.01 +/- 0.015 -> surface 0 +/- 0.015
+
+# --- Object placement decoupled from the table (objects at true base xy) ---
+object_xy_anchor: [0.0, 0.0]
+
+# WidowX init-qpos bank (6-dof rows; overrides default.yaml's franka 7-dof
+# banks, which would fail the arm_dof shape check). Sampled around the
+# SimplerEnv bridge table pose by SceneGen robot_augmentation/sample_widowx.sh.
+init_arm_pos_files:
+  - "/home/hez2/code/Grounded_MCTS_IsaacLab/data/init_arm_qpos_widowx.npz"
+
+# WidowX (bridge) has no wrist camera; the wx250s USD has no wrist_camera_link
+# to anchor one, so the wrist TiledCamera must not be spawned.
+enable_wrist_camera: false
+
+# --- Floor (slight perturbation) + walls (xy from render; height follows floor) ---
+floor_z_range: [-2.2, -1.8]                        # render FLOOR_Z=-2.0 +/- 0.2
+wall_front_xy: [2.2, 0.0]
+wall_left_xy: [0.0, 1.5]
+wall_scale: [1.5, 1.5, 1.5]

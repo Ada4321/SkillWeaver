@@ -1,0 +1,10 @@
+{
+    "pick_up": [
+        "Pick up the {obj} from the table.",
+        "Grab the {obj} located on the table.",
+        "Lift the {obj} off the table surface.",
+        "Retrieve the {obj} from the table.",
+        "Pick the {obj} up from the table.",
+        ""
+    ]
+}

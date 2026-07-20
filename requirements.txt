@@ -1,0 +1,10 @@
+google-generativeai
+fastapi
+trimesh
+open3d
+h5py
+bddl
+easydict
+cloudpickle
+gymnasium
+hydra-core

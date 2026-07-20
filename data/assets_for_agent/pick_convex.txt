@@ -1,0 +1,14 @@
+black_bowl_1
+black_bowl_2
+bowl
+cup
+drinking_glass
+measuring_cup
+mug
+ramekin
+red_coffee_mug
+small_teacup
+utensil_holder
+white_mug
+yellow_and_white_mug
+green_bowl

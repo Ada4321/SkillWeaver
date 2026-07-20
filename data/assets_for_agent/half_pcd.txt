@@ -1,0 +1,7 @@
+# Categories whose objects use the handle-half point cloud (*_half_pcd.npz)
+# as the pick-policy obs input when BaseEnvCfg.use_half_pcd=True. These are
+# elongated utensils where we want the policy to attend only to the handle
+# half (computed from Plan A: butter_knife->aniso, spoon/fork->radius).
+butter_knife
+spoon
+fork

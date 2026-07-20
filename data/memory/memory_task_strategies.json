@@ -1,0 +1,10 @@
+{
+  "strategy: place mug into microwave and close door": {
+    "value": "1. `pick` the `yellow_and_white_mug`. 2. `place_with_gripper_orientation_drop` into the `microwave`, aligning the gripper's Z-axis opposite to the microwave's opening axis (its X-axis). Target a point on the microwave's X-Z center plane, positioned 1/4 of the way deep from the opening. The opening is along the y-axis in the world frame. Judge: verify the mug is fully inside, clear of the door's path. 3. `close_door` on the `microwave`. Judge: verify the door is fully shut.",
+    "tags": [
+      "actor_phase_1",
+      "actor_phase_2",
+      "judge"
+    ]
+  }
+}

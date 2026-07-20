@@ -1,0 +1,1444 @@
+#usda 1.0
+(
+    defaultPrim = "panda"
+    subLayers = [
+        @./franka_gripper_libero_visual_wrist_palmback_5cm_tilt15.usd@
+    ]
+)
+
+over "panda"
+{
+    over "Looks" (
+        references = @./configuration/franka_gripper_libero_obj_visual_base.usd@</panda/Looks>
+    )
+    {
+        def Material "Conv_Face064_002_001_002_001"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Face064_002_001_002_001/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (1.000000, 0.000000, 0.000000)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.140000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Face065_002_001_002_001"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Face065_002_001_002_001/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (0.000000, 1.000000, 0.000000)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.140000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Face374_002_001_002_001"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Face374_002_001_002_001/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (1.000000, 1.000000, 1.000000)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Face539_002_001_002_001"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Face539_002_001_002_001/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (0.250980, 0.250980, 0.250980)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Face636_001"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Face636_001/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (0.901961, 0.921569, 0.929412)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_FallbackLight"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_FallbackLight/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (0.901961, 0.921569, 0.929412)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_GRIPPER_FINGER_VIS"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_GRIPPER_FINGER_VIS/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (0.499000, 0.499000, 0.499000)
+                float inputs:reflection_roughness_constant = 0.045000
+                float inputs:metallic_constant = 0.060000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_GRIPPER_HAND_VIS"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_GRIPPER_HAND_VIS/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (1.000000, 1.000000, 1.000000)
+                float inputs:reflection_roughness_constant = 0.045000
+                float inputs:metallic_constant = 0.060000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Part__Feature001_001_003_001"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Part__Feature001_001_003_001/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (1.000000, 1.000000, 1.000000)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Part__Feature001_009_001_002_001"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Part__Feature001_009_001_002_001/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (0.250980, 0.250980, 0.250980)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Part__Feature001_010_001_002"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Part__Feature001_010_001_002/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (1.000000, 1.000000, 1.000000)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Part__Feature002_001_003_001"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Part__Feature002_001_003_001/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (0.250980, 0.250980, 0.250980)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Part__Feature002_006_001_002_001"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Part__Feature002_006_001_002_001/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (0.250980, 0.250980, 0.250980)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Part__Feature002_007_001_002"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Part__Feature002_007_001_002/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (1.000000, 1.000000, 1.000000)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Part__Feature003_001_003_001"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Part__Feature003_001_003_001/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (1.000000, 1.000000, 1.000000)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Part__Feature003_004_001_002"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Part__Feature003_004_001_002/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (1.000000, 1.000000, 1.000000)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Part__Feature017_001"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Part__Feature017_001/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (1.000000, 1.000000, 1.000000)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Part__Feature018_001"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Part__Feature018_001/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (1.000000, 1.000000, 1.000000)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Part__Feature019_001"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Part__Feature019_001/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (1.000000, 1.000000, 1.000000)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Part__Feature022_001"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Part__Feature022_001/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (0.901961, 0.921569, 0.929412)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Part__Feature023_001"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Part__Feature023_001/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (0.250980, 0.250980, 0.250980)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Part__Feature024"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Part__Feature024/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (1.000000, 1.000000, 1.000000)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Part__Feature_001"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Part__Feature_001/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (1.000000, 1.000000, 1.000000)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Part__Feature_001_001_001_002"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Part__Feature_001_001_001_002/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (0.250980, 0.250980, 0.250980)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Part__Feature_002_003_001"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Part__Feature_002_003_001/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (1.000000, 1.000000, 1.000000)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Part__Feature_002_004_003"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Part__Feature_002_004_003/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (1.000000, 1.000000, 1.000000)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Part__Mirroring001_004_002"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Part__Mirroring001_004_002/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (0.250980, 0.250980, 0.250980)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Part__Mirroring002_004_001"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Part__Mirroring002_004_001/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (0.250980, 0.250980, 0.250980)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Part__Mirroring003_004_001"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Part__Mirroring003_004_001/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (0.250980, 0.250980, 0.250980)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Part__Mirroring004_004_002"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Part__Mirroring004_004_002/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (1.000000, 1.000000, 1.000000)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Part__Mirroring005_004_001"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Part__Mirroring005_004_001/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (0.250980, 0.250980, 0.250980)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Part__Mirroring006_004_001"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Part__Mirroring006_004_001/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (0.250980, 0.250980, 0.250980)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Part__Mirroring007_004_001"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Part__Mirroring007_004_001/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (0.250980, 0.250980, 0.250980)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Part__Mirroring_004_001"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Part__Mirroring_004_001/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (0.898039, 0.917647, 0.929412)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Shell001_001"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Shell001_001/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (0.250980, 0.250980, 0.250980)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Shell001_001_001_003"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Shell001_001_001_003/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (0.250000, 0.250000, 0.250000)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Shell002_001"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Shell002_001/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (0.901961, 0.921569, 0.929412)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Shell002_002_001_002_001"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Shell002_002_001_002_001/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (1.000000, 1.000000, 1.000000)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Shell003_001"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Shell003_001/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (0.901961, 0.921569, 0.929412)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Shell003_002_001_002_001"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Shell003_002_001_002_001/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (1.000000, 1.000000, 1.000000)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Shell004_001_001_002_001"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Shell004_001_001_002_001/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (1.000000, 1.000000, 1.000000)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Shell005_001_001_002_001"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Shell005_001_001_002_001/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (1.000000, 1.000000, 1.000000)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Shell006_003_002_001"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Shell006_003_002_001/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (0.901961, 0.921569, 0.929412)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Shell007_002_002_001"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Shell007_002_002_001/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (0.250000, 0.250000, 0.250000)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Shell009_001"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Shell009_001/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (0.250980, 0.250980, 0.250980)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Shell010_001"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Shell010_001/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (0.901961, 0.921569, 0.929412)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Shell011_002_002_001"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Shell011_002_002_001/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (1.000000, 1.000000, 1.000000)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Shell012_002_002_001"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Shell012_002_002_001/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (1.000000, 1.000000, 1.000000)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Shell_001"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Shell_001/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (0.250980, 0.250980, 0.250980)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Shell_001_001_003"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Shell_001_001_003/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (1.000000, 1.000000, 1.000000)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Shell_003_001_002_001"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Shell_003_001_002_001/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (0.250980, 0.250980, 0.250980)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.300000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Union001_001_001_002_001"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Union001_001_001_002_001/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (0.039216, 0.541176, 0.780392)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.140000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+
+        def Material "Conv_Union_001_001_002_001"
+        {
+            token outputs:mdl:surface.connect = </panda/Looks/Conv_Union_001_001_002_001/Shader.outputs:out>
+            def Shader "Shader"
+            {
+                uniform token info:implementationSource = "sourceAsset"
+                uniform asset info:mdl:sourceAsset = @OmniPBR.mdl@
+                uniform token info:mdl:sourceAsset:subIdentifier = "OmniPBR"
+                color3f inputs:diffuse_color_constant = (0.039216, 0.541176, 0.780392)
+                float inputs:reflection_roughness_constant = 0.022000
+                float inputs:metallic_constant = 0.140000
+                float inputs:specular_level = 1.000000
+                token outputs:out
+            }
+        }
+    }
+
+    over "panda_link0"
+    {
+        over "visuals" (
+            instanceable = false
+            references = @./configuration/franka_gripper_libero_obj_visual_base.usd@</visuals/panda_link0>
+        )
+        {
+            rel material:binding = </panda/Looks/Conv_FallbackLight>
+            over "link0" (active = false)
+            {
+            }
+            over "link0_vis_0"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Shell010_001>
+                }
+            }
+            over "link0_vis_1"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Shell009_001>
+                }
+            }
+            over "link0_vis_2"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Shell003_001>
+                }
+            }
+            over "link0_vis_3"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Shell_001>
+                }
+            }
+            over "link0_vis_4"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Shell002_001>
+                }
+            }
+            over "link0_vis_5"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Shell001_001>
+                }
+            }
+            over "link0_vis_6"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Face636_001>
+                }
+            }
+            over "link0_vis_7"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Part__Feature018_001>
+                }
+            }
+            over "link0_vis_8"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Part__Feature019_001>
+                }
+            }
+            over "link0_vis_9"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Part__Feature023_001>
+                }
+            }
+            over "link0_vis_10"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Part__Feature022_001>
+                }
+            }
+            over "link0_vis_11"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Part__Feature017_001>
+                }
+            }
+        }
+    }
+
+    over "panda_link1"
+    {
+        over "visuals" (
+            instanceable = false
+            references = @./configuration/franka_gripper_libero_obj_visual_base.usd@</visuals/panda_link1>
+        )
+        {
+            rel material:binding = </panda/Looks/Conv_FallbackLight>
+            over "link1" (active = false)
+            {
+            }
+            over "link1_vis"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Part__Feature_001>
+                }
+            }
+        }
+    }
+
+    over "panda_link2"
+    {
+        over "visuals" (
+            instanceable = false
+            references = @./configuration/franka_gripper_libero_obj_visual_base.usd@</visuals/panda_link2>
+        )
+        {
+            rel material:binding = </panda/Looks/Conv_FallbackLight>
+            over "link2" (active = false)
+            {
+            }
+            over "link2_vis"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Part__Feature024>
+                }
+            }
+        }
+    }
+
+    over "panda_link3"
+    {
+        over "visuals" (
+            instanceable = false
+            references = @./configuration/franka_gripper_libero_obj_visual_base.usd@</visuals/panda_link3>
+        )
+        {
+            rel material:binding = </panda/Looks/Conv_FallbackLight>
+            over "link3" (active = false)
+            {
+            }
+            over "link3_vis_0"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Part__Feature003_004_001_002>
+                }
+            }
+            over "link3_vis_1"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Part__Feature002_007_001_002>
+                }
+            }
+            over "link3_vis_2"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Part__Feature001_010_001_002>
+                }
+            }
+            over "link3_vis_3"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Part__Feature_001_001_001_002>
+                }
+            }
+        }
+    }
+
+    over "panda_link4"
+    {
+        over "visuals" (
+            instanceable = false
+            references = @./configuration/franka_gripper_libero_obj_visual_base.usd@</visuals/panda_link4>
+        )
+        {
+            rel material:binding = </panda/Looks/Conv_FallbackLight>
+            over "link4" (active = false)
+            {
+            }
+            over "link4_vis_0"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Part__Feature001_001_003_001>
+                }
+            }
+            over "link4_vis_1"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Part__Feature003_001_003_001>
+                }
+            }
+            over "link4_vis_2"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Part__Feature002_001_003_001>
+                }
+            }
+            over "link4_vis_3"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Part__Feature_002_003_001>
+                }
+            }
+        }
+    }
+
+    over "panda_link5"
+    {
+        over "visuals" (
+            instanceable = false
+            references = @./configuration/franka_gripper_libero_obj_visual_base.usd@</visuals/panda_link5>
+        )
+        {
+            rel material:binding = </panda/Looks/Conv_FallbackLight>
+            over "link5" (active = false)
+            {
+            }
+            over "link5_vis_0"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Shell001_001_001_003>
+                }
+            }
+            over "link5_vis_1"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Shell_001_001_003>
+                }
+            }
+            over "link5_vis_2"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Part__Feature_002_004_003>
+                }
+            }
+        }
+    }
+
+    over "panda_link6"
+    {
+        over "visuals" (
+            instanceable = false
+            references = @./configuration/franka_gripper_libero_obj_visual_base.usd@</visuals/panda_link6>
+        )
+        {
+            rel material:binding = </panda/Looks/Conv_FallbackLight>
+            over "link6" (active = false)
+            {
+            }
+            over "link6_vis_0"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Shell006_003_002_001>
+                }
+            }
+            over "link6_vis_1"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Shell011_002_002_001>
+                }
+            }
+            over "link6_vis_2"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Shell007_002_002_001>
+                }
+            }
+            over "link6_vis_3"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Shell005_001_001_002_001>
+                }
+            }
+            over "link6_vis_4"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Shell004_001_001_002_001>
+                }
+            }
+            over "link6_vis_5"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Shell003_002_001_002_001>
+                }
+            }
+            over "link6_vis_6"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Shell002_002_001_002_001>
+                }
+            }
+            over "link6_vis_7"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Union001_001_001_002_001>
+                }
+            }
+            over "link6_vis_8"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Union_001_001_002_001>
+                }
+            }
+            over "link6_vis_9"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Face539_002_001_002_001>
+                }
+            }
+            over "link6_vis_10"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Shell_003_001_002_001>
+                }
+            }
+            over "link6_vis_11"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Face374_002_001_002_001>
+                }
+            }
+            over "link6_vis_12"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Face065_002_001_002_001>
+                }
+            }
+            over "link6_vis_13"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Face064_002_001_002_001>
+                }
+            }
+            over "link6_vis_14"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Part__Feature002_006_001_002_001>
+                }
+            }
+            over "link6_vis_15"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Part__Feature001_009_001_002_001>
+                }
+            }
+            over "link6_vis_16"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Shell012_002_002_001>
+                }
+            }
+        }
+    }
+
+    over "panda_link7"
+    {
+        over "visuals" (
+            instanceable = false
+            references = @./configuration/franka_gripper_libero_obj_visual_base.usd@</visuals/panda_link7>
+        )
+        {
+            rel material:binding = </panda/Looks/Conv_FallbackLight>
+            over "link7" (active = false)
+            {
+            }
+            over "link7_vis_0"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Part__Mirroring004_004_002>
+                }
+            }
+            over "link7_vis_1"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Part__Mirroring001_004_002>
+                }
+            }
+            over "link7_vis_2"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Part__Mirroring007_004_001>
+                }
+            }
+            over "link7_vis_3"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Part__Mirroring006_004_001>
+                }
+            }
+            over "link7_vis_4"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Part__Mirroring005_004_001>
+                }
+            }
+            over "link7_vis_5"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Part__Mirroring003_004_001>
+                }
+            }
+            over "link7_vis_6"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Part__Mirroring002_004_001>
+                }
+            }
+            over "link7_vis_7"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_Part__Mirroring_004_001>
+                }
+            }
+        }
+    }
+
+    over "panda_hand"
+    {
+        over "visuals" (
+            instanceable = false
+            references = @./configuration/franka_gripper_libero_obj_visual_base.usd@</visuals/panda_hand>
+        )
+        {
+            rel material:binding = </panda/Looks/Conv_GRIPPER_HAND_VIS>
+            over "hand"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_GRIPPER_HAND_VIS>
+                    over "node2_Part__Feature002_005"
+                    {
+                        rel material:binding = </panda/Looks/Conv_GRIPPER_HAND_VIS>
+                    }
+                    over "node5_Part__Feature005_001"
+                    {
+                        rel material:binding = </panda/Looks/Conv_GRIPPER_HAND_VIS>
+                    }
+                    over "node0_Part__Feature_009"
+                    {
+                        rel material:binding = </panda/Looks/Conv_GRIPPER_HAND_VIS>
+                    }
+                    over "node1_Part__Feature001_007"
+                    {
+                        rel material:binding = </panda/Looks/Conv_GRIPPER_HAND_VIS>
+                    }
+                    over "node5_001_Part__Feature005_002"
+                    {
+                        rel material:binding = </panda/Looks/Conv_GRIPPER_HAND_VIS>
+                    }
+                }
+            }
+        }
+    }
+
+    over "panda_leftfinger"
+    {
+        over "visuals" (
+            instanceable = false
+            references = @./configuration/franka_gripper_libero_obj_visual_base.usd@</visuals/panda_leftfinger>
+        )
+        {
+            rel material:binding = </panda/Looks/Conv_GRIPPER_FINGER_VIS>
+            over "finger"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_GRIPPER_FINGER_VIS>
+                    over "node0_Part__Feature_008"
+                    {
+                        rel material:binding = </panda/Looks/Conv_GRIPPER_FINGER_VIS>
+                    }
+                    over "node1_Part__Feature001_001"
+                    {
+                        rel material:binding = </panda/Looks/Conv_GRIPPER_FINGER_VIS>
+                    }
+                }
+            }
+        }
+    }
+
+    over "panda_rightfinger"
+    {
+        over "visuals" (
+            instanceable = false
+            references = @./configuration/franka_gripper_libero_obj_visual_base.usd@</visuals/panda_rightfinger>
+        )
+        {
+            rel material:binding = </panda/Looks/Conv_GRIPPER_FINGER_VIS>
+            over "finger"
+            {
+                over "mesh"
+                {
+                    rel material:binding = </panda/Looks/Conv_GRIPPER_FINGER_VIS>
+                    over "node0_Part__Feature_008"
+                    {
+                        rel material:binding = </panda/Looks/Conv_GRIPPER_FINGER_VIS>
+                    }
+                    over "node1_Part__Feature001_001"
+                    {
+                        rel material:binding = </panda/Looks/Conv_GRIPPER_FINGER_VIS>
+                    }
+                }
+            }
+        }
+    }
+
+    over "panda_leftfinger_tip"
+    {
+        over "visuals" (active = false)
+        {
+        }
+    }
+
+    over "panda_rightfinger_tip"
+    {
+        over "visuals" (active = false)
+        {
+        }
+    }
+
+    over "panda_grip_site"
+    {
+        over "visuals" (active = false)
+        {
+        }
+    }
+
+    over "wrist_camera_link"
+    {
+        over "visuals" (active = false)
+        {
+        }
+    }
+
+}

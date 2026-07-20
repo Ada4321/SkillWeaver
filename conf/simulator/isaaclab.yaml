@@ -1,0 +1,74 @@
+name: isaaclab
+view_names:
+  - front
+  - top
+isaaclab:
+  num_envs: 1
+  pool_size: 1  # num parallel env slots; num_envs is set to pool_size at make_env()
+  task: null
+  renderer: PathTracing
+  samples_per_pixel_per_frame: 1
+  render_mode: rgb_array
+  enable_pick: false
+  enable_place: false
+  enable_pose: false
+  enable_open_drawer: false
+  enable_close_drawer: false
+  enable_close_door: false
+  eval_num: 20
+  grasp_force_threshold: 2.0
+  robot_name: panda
+  h: 512
+  w: 512
+  wrist_h: 256
+  wrist_w: 256
+  camera_names:
+    - front
+    - top
+    - wrist
+  data_collect_h: 256
+  data_collect_w: 256
+  data_collect_camera_names: 
+    - front
+    - wrist
+  collect_depth: false
+  collect_segmentation: false
+  collect_object_poses: false
+  data_collect_depth_storage: uint16
+  data_collect_depth_scale: 1000.0
+  data_collect_seg_storage: uint8
+  lift_offset: 0.25
+  place_offset: 0.2
+  place_offset_center: 0.05
+  place_offset_rlpolicy: 0.15
+  place_offset_rlpolicy_upright: 0.05
+  place_offset_orientation_drop: 0.05
+  place_offset_gripper_orientation: 0.0
+  place_offset_nonvertical: 0.01
+  approach_vertical_angle_deg: 20.0
+  container_list: /home/hez2/code/Grounded_MCTS_IsaacLab/data/assets_for_agent/container.txt
+  elongated_list: /home/hez2/code/Grounded_MCTS_IsaacLab/data/assets_for_agent/elongated.txt
+  container_upright_cos_threshold: 0.866
+  place_noise_std_xyz:
+    - 0.0
+    - 0.0
+    - 0.0
+  pregrasp_offset: 0.15
+  pregrasp_noise_std_xyz:
+    - 0.01
+    - 0.01
+    - 0.01
+  pregrasp_fallback_enable: false
+  pregrasp_fallback_radii:
+    - 0.02
+    - 0.04
+    - 0.06
+  pregrasp_fallback_num_directions: 8
+  release_offset: 0.15
+  release_retract_offset: 0.07
+  agent_cfg_file: null
+app:
+  headless: true
+  enable_cameras: false
+  rendering_mode: quality
+  kit_args: null

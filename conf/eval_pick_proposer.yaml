@@ -1,0 +1,56 @@
+defaults:
+  - simulator: isaaclab
+  - env: default
+  - skills: default
+  - _self_
+
+run:
+  num_trials: 5
+  top_k: -1   # -1 = use all returned grasps (server returns ~150 over threshold)
+  graspgen_url: http://localhost:9050/predict
+  grasp_hold_steps: 30
+  lift_height: 0.25
+  post_lift_hold_steps: 20
+  out_dir: /data/group_data/katefgroup/datasets/hez2/ablation/grasp/${now:%Y%m%d_%H%M%S}
+  # asset selection is driven by the manifest; run.sh loops target_idx 0..N-1.
+  manifest: /home/hez2/code/Grounded_MCTS_IsaacLab/eval_grasp/asset_manifest.json
+  asset_root: /data/group_data/katefgroup-ssd/sim_scene_gen/assets
+  target_idx: 0           # which unit in the flattened manifest to run
+  cos_upright: 0.9        # |canonical_z . world_z| > this  => upright/standing
+  cos_lying: 0.3          # |canonical_z . world_z| < this  => lying
+
+simulator:
+  isaaclab:
+    enable_pick: true
+    enable_place: false
+    enable_pose: false
+    enable_open_drawer: false
+    enable_close_drawer: false
+    enable_close_door: false
+    task: GroundedBase-v0
+    num_envs: 1
+    pool_size: 1
+  app:
+    headless: true
+    enable_cameras: true
+    rendering_mode: quality
+    kit_args: "--no-window"
+
+env:
+  randomize_xy: false
+  # default episode_length_s=10 -> 200 steps (dt 0.002 x decim 25); our manual
+  # rollout (approach+close+lift+hold) is ~250 steps and would truncate mid-lift,
+  # triggering an auto-reset that clobbers obj_init_z. Give plenty of headroom.
+  episode_length_s: 60.0
+
+# we don't actually load RL ckpts in v1, but keep keys so skills/default.yaml interpolations resolve
+skills:
+  rl:
+    backend: local
+
+hydra:
+  job:
+    chdir: false
+  run:
+    dir: .
+  output_subdir: null

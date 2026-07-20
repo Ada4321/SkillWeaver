@@ -1,0 +1,11 @@
+# libero_10 KITCHEN-scene preset: FIXED LIBERO agentview head camera.
+#
+# The LIBERO kitchen arena's compiled agentview is IDENTICAL to the tabletop
+# arena used by libero_spatial / libero_goal:
+#   agentview world pose (0.6586, 0, 1.6104), robot base (-0.66, 0, 0.912)
+#   => cam rel-base (1.319, 0, 0.698), optical pitch 38.9 deg, fovy 45.
+# So this preset is just libero_spatial (kitchen == tabletop agentview); kept as a
+# named alias so libero_10 kitchen-scene tasks can select env=libero_10_kitchen.
+defaults:
+  - libero_spatial
+  - _self_
