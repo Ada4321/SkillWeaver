@@ -15,7 +15,7 @@ Su Li<sup>1</sup>,
 <sup>1</sup>Carnegie Mellon University &nbsp;&nbsp; <sup>2</sup>University of Illinois Urbana-Champaign<br>
 <sup>&dagger;</sup>Work done during an internship at Carnegie Mellon University
 
-[**Project Page**](https://ada4321.github.io/skillweaver-project/) &nbsp;|&nbsp;
+[**Project Page**](https://katefgroup.github.io/skillweaver/) &nbsp;|&nbsp;
 [**arXiv**](https://arxiv.org/abs/2609.36171) &nbsp;|&nbsp;
 [**Paper**](https://arxiv.org/pdf/2609.36171)
 
