@@ -36,7 +36,7 @@ LIBERO-PRO, LIBERO, SIMPLER-WidowX and a real Franka robot.
 
 ## Release status
 
-- [ ] **Neural Interaction Skills**: PPO training of Pick / Place / Open / Close in Isaac Lab (coming soon)
+- [x] **Neural Interaction Skills**: PPO training of Pick / Place / Open / Close in Isaac Lab ([SkillWeaver-NIS](https://github.com/Ada4321/SkillWeaver-NIS))
 - [ ] **Agentic exploration**: VLM planner, MCTS, hierarchical verifier, experience memory, trajectory export (coming soon)
 - [ ] **Test data**: a small set of scenes, assets and NIS checkpoints to run the pipeline end to end (coming soon)
 - [ ] **Policy training**: trajectory to RLDS conversion, π0.5 fine-tuning configs (coming soon)
@@ -58,7 +58,7 @@ flowchart LR
 
 | Interface | Producer | Consumer |
 |---|---|---|
-| Skill checkpoints (`.pth`, rl_games) | SkillWeaver-NIS | SkillWeaver (closed-loop skill execution) |
+| Skill checkpoints (`.pth`, rl_games) | [SkillWeaver-NIS](https://github.com/Ada4321/SkillWeaver-NIS) | SkillWeaver (closed-loop skill execution) |
 | Trajectories (`traj/*.npz`): RGB, depth, segmentation, joint states and actions, object states, language | SkillWeaver | RLDS converter |
 | RLDS dataset | RLDS converter | π0.5 training |
 | Policy server (websocket) | openpi `serve_policy.py` | benchmark clients |
