@@ -34,6 +34,11 @@ hierarchical VLM verifier scores each skill outcome and writes reflections on fa
 multimodal demonstrations and distilled into visuomotor policies (π0.5), which we evaluate on
 LIBERO-PRO, LIBERO, SIMPLER-WidowX and a real Franka robot.
 
+## News
+
+- **2026-10**: Released [SkillWeaver-NIS](https://github.com/Ada4321/SkillWeaver-NIS): Isaac Lab training
+  environments and configurations for the Neural Interaction Skills (11 Franka sub-policies and WidowX Pick).
+
 ## Release status
 
 - [x] **Neural Interaction Skills**: PPO training of Pick / Place / Open / Close in Isaac Lab ([SkillWeaver-NIS](https://github.com/Ada4321/SkillWeaver-NIS))
