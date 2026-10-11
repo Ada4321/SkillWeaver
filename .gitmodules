@@ -1,3 +1,7 @@
 [submodule "SkillWeaver-NIS"]
 	path = SkillWeaver-NIS
 	url = https://github.com/Ada4321/SkillWeaver-NIS.git
+[submodule "SkillWeaver-openpi"]
+	path = SkillWeaver-openpi
+	url = https://github.com/Ada4321/SkillWeaver-openpi.git
+	branch = skillweaver

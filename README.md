@@ -36,6 +36,8 @@ LIBERO-PRO, LIBERO, SIMPLER-WidowX and a real Franka robot.
 
 ## News
 
+- **2026-10**: Released [SkillWeaver-openpi](https://github.com/Ada4321/SkillWeaver-openpi): conversion of SkillWeaver trajectories to RLDS and π0.5
+  fine-tuning, with the LIBERO-Object training data on [Hugging Face](https://huggingface.co/datasets/Ada-4321/SkillWeaver-RLDS).
 - **2026-10**: Released [SkillWeaver-NIS](https://github.com/Ada4321/SkillWeaver-NIS): Isaac Lab training
   environments for the Neural Interaction Skills (11 Franka sub-policies and WidowX Pick), with their checkpoints
   and example assets on [Hugging Face](https://huggingface.co/datasets/Ada-4321/SkillWeaver-NIS).
@@ -45,7 +47,7 @@ LIBERO-PRO, LIBERO, SIMPLER-WidowX and a real Franka robot.
 - [x] **Neural Interaction Skills**: PPO training of Pick / Place / Open / Close in Isaac Lab ([code](https://github.com/Ada4321/SkillWeaver-NIS), [checkpoints and assets](https://huggingface.co/datasets/Ada-4321/SkillWeaver-NIS))
 - [ ] **Agentic exploration**: VLM planner, MCTS, hierarchical verifier, experience memory, trajectory export (coming soon)
 - [ ] **Test data**: a small set of scenes, assets and NIS checkpoints to run the pipeline end to end (coming soon)
-- [ ] **Policy training**: trajectory to RLDS conversion, π0.5 fine-tuning configs (coming soon)
+- [x] **Policy training**: trajectory to RLDS conversion, π0.5 fine-tuning configs ([code](https://github.com/Ada4321/SkillWeaver-openpi), [data](https://huggingface.co/datasets/Ada-4321/SkillWeaver-RLDS))
 - [ ] **Benchmark evaluation**: LIBERO-PRO, LIBERO, SIMPLER-WidowX clients (coming soon)
 
 The asset and scene generation pipeline, real-to-sim scene reconstruction and real-robot
@@ -53,8 +55,8 @@ deployment code are not part of this release.
 
 ## Getting the code
 
-[SkillWeaver-NIS](https://github.com/Ada4321/SkillWeaver-NIS) is included as a git submodule, so clone with
-`--recursive`:
+[SkillWeaver-NIS](https://github.com/Ada4321/SkillWeaver-NIS) and [SkillWeaver-openpi](https://github.com/Ada4321/SkillWeaver-openpi) are included as git
+submodules, so clone with `--recursive`:
 
 ```bash
 git clone --recursive https://github.com/Ada4321/SkillWeaver.git
@@ -69,16 +71,16 @@ are described in its own README.
 flowchart LR
     NIS["SkillWeaver-NIS<br/>PPO skill training"] -- "skill checkpoints (.pth)" --> SW
     DATA["Test scenes + assets"] --> SW
-    SW["SkillWeaver<br/>agentic exploration"] -- "verified trajectories (.npz)" --> CONV["RLDS conversion"]
-    CONV --> TRAIN["π0.5 fine-tuning<br/>(openpi fork)"]
+    SW["SkillWeaver<br/>agentic exploration"] -- "verified trajectories (.npz)" --> CONV["RLDS conversion<br/>(SkillWeaver-openpi)"]
+    CONV --> TRAIN["π0.5 fine-tuning<br/>(SkillWeaver-openpi)"]
     TRAIN -- "policy server (websocket)" --> EVAL["Evaluation<br/>LIBERO-PRO / LIBERO / SIMPLER"]
 ```
 
 | Interface | Producer | Consumer |
 |---|---|---|
 | Skill checkpoints (`.pth`, rl_games) | [SkillWeaver-NIS](https://github.com/Ada4321/SkillWeaver-NIS) | SkillWeaver (closed-loop skill execution) |
-| Trajectories (`traj/*.npz`): RGB, depth, segmentation, joint states and actions, object states, language | SkillWeaver | RLDS converter |
-| RLDS dataset | RLDS converter | π0.5 training |
+| Trajectories (`traj/*.npz`): RGB, depth, segmentation, joint states and actions, object states, language | SkillWeaver | RLDS converter ([SkillWeaver-openpi](https://github.com/Ada4321/SkillWeaver-openpi)) |
+| RLDS dataset | RLDS converter | π0.5 training ([SkillWeaver-openpi](https://github.com/Ada4321/SkillWeaver-openpi)) |
 | Policy server (websocket) | openpi `serve_policy.py` | benchmark clients |
 
 ## Citation
