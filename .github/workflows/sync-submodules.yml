@@ -1,0 +1,40 @@
+# Keep the submodules (SkillWeaver-NIS, SkillWeaver-openpi) at the latest commit of the branch each one tracks
+# in .gitmodules. Runs once a day, on demand, and when this workflow changes.
+name: Sync submodules
+
+on:
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [.github/workflows/sync-submodules.yml]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-submodules
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Update submodules and commit
+        run: |
+          git submodule update --remote
+          if git diff --quiet; then
+            echo "Submodules are up to date."
+            exit 0
+          fi
+          body=""
+          for path in $(git diff --name-only); do
+            body="${body}${path}: $(git -C "$path" log -1 --format='%h %s')"$'\n'
+          done
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "Bump submodules" -m "$body"
+          git push
