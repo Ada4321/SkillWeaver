@@ -50,6 +50,18 @@ LIBERO-PRO, LIBERO, SIMPLER-WidowX and a real Franka robot.
 The asset and scene generation pipeline, real-to-sim scene reconstruction and real-robot
 deployment code are not part of this release.
 
+## Getting the code
+
+[SkillWeaver-NIS](https://github.com/Ada4321/SkillWeaver-NIS) is included as a git submodule, so clone with
+`--recursive`:
+
+```bash
+git clone --recursive https://github.com/Ada4321/SkillWeaver.git
+```
+
+In an existing clone, run `git submodule update --init --recursive`. Installation and usage of each component
+are described in its own README.
+
 ## Code architecture
 
 ```mermaid
