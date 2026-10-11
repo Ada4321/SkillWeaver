@@ -37,11 +37,12 @@ LIBERO-PRO, LIBERO, SIMPLER-WidowX and a real Franka robot.
 ## News
 
 - **2026-10**: Released [SkillWeaver-NIS](https://github.com/Ada4321/SkillWeaver-NIS): Isaac Lab training
-  environments and configurations for the Neural Interaction Skills (11 Franka sub-policies and WidowX Pick).
+  environments for the Neural Interaction Skills (11 Franka sub-policies and WidowX Pick), with their checkpoints
+  and example assets on [Hugging Face](https://huggingface.co/datasets/Ada-4321/SkillWeaver-NIS).
 
 ## Release status
 
-- [x] **Neural Interaction Skills**: PPO training of Pick / Place / Open / Close in Isaac Lab ([SkillWeaver-NIS](https://github.com/Ada4321/SkillWeaver-NIS))
+- [x] **Neural Interaction Skills**: PPO training of Pick / Place / Open / Close in Isaac Lab ([code](https://github.com/Ada4321/SkillWeaver-NIS), [checkpoints and assets](https://huggingface.co/datasets/Ada-4321/SkillWeaver-NIS))
 - [ ] **Agentic exploration**: VLM planner, MCTS, hierarchical verifier, experience memory, trajectory export (coming soon)
 - [ ] **Test data**: a small set of scenes, assets and NIS checkpoints to run the pipeline end to end (coming soon)
 - [ ] **Policy training**: trajectory to RLDS conversion, π0.5 fine-tuning configs (coming soon)
